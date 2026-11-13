@@ -1,0 +1,75 @@
+name: Publish SAFE-IR v0.1.0 Evidence Release
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v0.1.0.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check existing release
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.1.0 >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-java@v4
+        if: steps.existing.outputs.exists == 'false'
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - uses: actions/setup-python@v5
+        if: steps.existing.outputs.exists == 'false'
+        with:
+          python-version: '3.11'
+      - name: Generate and validate evidence
+        if: steps.existing.outputs.exists == 'false'
+        run: bash collect_evidence.sh
+      - name: Prepare release notes
+        if: steps.existing.outputs.exists == 'false'
+        run: |
+          cat > RELEASE_NOTES.md <<'EOF'
+          # SAFE-IR v0.1.0 — Synthetic Feasibility Study
+
+          This release documents a reproducible synthetic feasibility test, not production incident recovery.
+
+          ## Evidence
+          - safe-ir-supplement.zip: complete Surefire reports, runtime logs, CSV/JSON outputs, HTTP checks, environment, checksum manifest, and collector.
+          - runs.csv: 180 synthetic scenario-mode repetitions (6 scenarios x 3 modes x 10 repeats).
+          - summary.json: aggregate metrics.
+          - MANIFEST.sha256: checksums within the evidence bundle.
+          - ENVIRONMENT.txt: source commit and tooling details.
+
+          ## Limitations
+          - No real services are restarted or restored; outcomes are from a synthetic oracle.
+          - Repeated inputs are not independent samples.
+          - Offline RULES and UNGUARDED use the same proposal generator.
+          - Timing data is request processing duration, not MTTR.
+          - Ollama is optional and is not available in the hosted GitHub Actions test runner.
+          - These results cannot establish real-world effectiveness or statistical significance.
+
+          To reproduce: check out the tagged commit and run bash collect_evidence.sh.
+          EOF
+      - name: Publish tagged release with evidence assets
+        if: steps.existing.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v0.1.0 \
+            --target "$GITHUB_SHA" \
+            --title "SAFE-IR v0.1.0 — Synthetic Feasibility Study" \
+            --notes-file RELEASE_NOTES.md \
+            safe-ir-supplement.zip \
+            safe-ir-supplement/results-offline/runs.csv \
+            safe-ir-supplement/results-offline/summary.json \
+            safe-ir-supplement/MANIFEST.sha256 \
+            safe-ir-supplement/ENVIRONMENT.txt
