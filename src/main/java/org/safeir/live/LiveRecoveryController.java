@@ -49,7 +49,8 @@ public class LiveRecoveryController {
                                     long elapsedMillis) {}
 
     private static final int SAMPLES = 5;
-    private static final Duration MAX_AGE = Duration.ofMinutes(10);
+    @Value("${safeir.lab.capture-ttl:PT10M}")
+    private Duration maxAge = Duration.ofMinutes(10);
     private static final Map<String, String> HOSTS = Map.of(
         "orders", "http://orders:8080",
         "payments", "http://payments:8080",
@@ -145,7 +146,7 @@ public class LiveRecoveryController {
         if (request == null || request.service() == null || !HOSTS.containsKey(request.service()))
             return ResponseEntity.badRequest().body(Map.of("error", "Known service required"));
         // Expired captures are never reusable; do not clear pending audit records.
-        captures.entrySet().removeIf(e -> e.getValue().created().isBefore(Instant.now().minus(MAX_AGE)));
+        captures.entrySet().removeIf(e -> e.getValue().created().isBefore(Instant.now().minus(maxAge)));
         var evidence = sample(request.service());
         var incident = incident(evidence);
         Proposal proposal;
@@ -173,7 +174,7 @@ public class LiveRecoveryController {
         if (!authorized(credential)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         if (request == null || request.captureId() == null) return ResponseEntity.badRequest().build();
         Captured capture = captures.get(request.captureId());
-        if (capture == null || capture.created().isBefore(Instant.now().minus(MAX_AGE))) {
+        if (capture == null || capture.created().isBefore(Instant.now().minus(maxAge))) {
             return ResponseEntity.badRequest().body(Map.of("error", "Expired or unknown proposal"));
         }
         String arm = request.guarded() ? "ECRA" : "BASELINE";
@@ -237,7 +238,7 @@ public class LiveRecoveryController {
         if (!pending.status().equals("PENDING")) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Approval already decided"));
         }
-        if (capture.created().isBefore(Instant.now().minus(MAX_AGE))) {
+        if (capture.created().isBefore(Instant.now().minus(maxAge))) {
             ApprovalRecord expired = new ApprovalRecord(pending.captureId(), pending.service(),
                 pending.action(), pending.proposalSource(), pending.evidence(), pending.created(),
                 "EXPIRED", "Capture expired", Instant.now());
