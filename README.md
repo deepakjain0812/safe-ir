@@ -12,7 +12,7 @@ SAFE-IR separates a replaceable remediation proposer (deterministic rules or loc
 
 ## Architecture
 
-<img width="1664" height="977" alt="image" src="https://github.com/user-attachments/assets/ce15818d-966c-4187-b7b0-d1d879acd7ea" />
+<img width="100%" alt="SAFE-IR v0.2.0 architecture: recovery controller, disposable Docker lab, and external Python verifier" src="https://github.com/user-attachments/assets/ce15818d-966c-4187-b7b0-d1d879acd7ea" />
 
 
 
@@ -177,7 +177,11 @@ src/main/java/org/safeir/
   sim/         Synthetic incident generator and outcome model
   service/     Experiment orchestration
 src/test/      JUnit 5 tests
-experiments/   v0.1.0 synthetic Python HTTP checks and CSV/JSON runner\nlab/           Java 21 live-service image, tests, workload and Python live verification\ndocker-compose.lab.yml  Isolated multi-service lab, controller, optional Ollama\n.github/workflows/live-policy.yml  Matched rule-based replay and safety rubric CI\n.github/workflows/real-ollama.yml Real Ollama model-backed smoke CI
+experiments/   v0.1.0 synthetic Python HTTP checks and CSV/JSON runner
+lab/           Java 21 live-service image, tests, workload and Python live verification
+docker-compose.lab.yml  Isolated multi-service lab, controller, optional Ollama
+.github/workflows/live-policy.yml  Matched rule-based replay and safety rubric CI
+.github/workflows/real-ollama.yml Real Ollama model-backed smoke CI
 ```
 
 **Publication:** Verify employer intellectual-property and external-publication requirements before treating this repository as a citable research artifact.
