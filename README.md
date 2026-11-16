@@ -16,7 +16,72 @@ SAFE-IR separates a replaceable remediation proposer (deterministic rules or loc
 
 
 
-**Diagram boundaries:** Each trial arm starts from a freshly reinjected fault and reuses the *same captured proposal*. The arms run sequentially; they are not a randomized study. ECRA does not grant arbitrary host or Docker access. The executor only clears a lab-injected fault when permitted, and **`RESTART_SERVICE` is a simulated label for that fault reset, not a process/container restart**. The external verifier checks actual HTTP responses, not a recovery oracle. There is no OpenTelemetry collector, human-approval workflow, production executor, or live infrastructure restoration.
+**Diagram boundaries:** Each trial arm starts from a freshly reinjected fault and reuses the *same captured proposal*. The arms run sequentially; they are not a randomized study. ECRA does not grant arbitrary host or Docker access. The executor only clears a lab-injected fault when permitted, and **`RESTART_SERVICE` is a simulated label for that fault reset, not a process/container restart**. The external verifier checks actual HTTP responses, not a recovery oracle. There is no OpenTelemetry collector, production-grade human-approval identity/audit system, production executor, or live infrastructure restoration. A lab-only reviewer workflow is available through the dashboard.
+
+## Run the visual dashboard (recommended)
+
+**Want to see SAFE-IR in action without using the API?** Start the disposable lab and open the interactive browser dashboard. The default demonstration uses controlled, repeatable proposals; an optional mode asks a real local Ollama model to choose an action.
+
+**Prerequisites:** Docker Desktop (or Docker Engine with Compose v2), enough resources to build Java 21 images, and a modern browser. No local Java, Maven, Python, or API client is required just to view the dashboard.
+
+```bash
+git clone https://github.com/deepakjain0812/safe-ir.git
+cd safe-ir
+
+# Start the three services and the recovery controller.
+docker compose -f docker-compose.lab.yml up --build -d
+```
+
+Open **[http://127.0.0.1:18080/lab-dashboard.html](http://127.0.0.1:18080/lab-dashboard.html)** in a browser on the same computer. If it is still starting, wait for the containers to become ready and refresh.
+
+1. Leave the prefilled **Lab access token** unchanged; it is a fixed, local demonstration credential.
+2. For human-review scenarios, click **Generate & use demo token**. The UI creates and fills a one-time reviewer credential automatically; you do not need to paste a token from the terminal. If the server already has a configured reviewer token, use that token instead.
+3. Choose a situation from **Choose the situation you want to test**, then click **Run selected scenario**.
+4. Watch **What is happening right now?** for plain-English events and review the decision, applied-action and verification fields. When a scenario requests human approval, the Approve/Reject controls appear **inside Scenario B**.
+5. Try other scenarios independently. The demo resets injected faults after completed runs, but interrupted runs may need a restart.
+
+| Scenario | What it demonstrates |
+| --- | --- |
+| Service failure → safe recovery | A deliberate Payments HTTP error can be cleared by a restricted fault reset, then checked with fresh probes |
+| Dangerous database action → blocked | ECRA denies a deliberately injected destructive proposal |
+| Slow service → human approval | High measured latency can require a reviewer before proceeding; **actual scaling is not implemented** |
+| Human rejects proposed change | The reviewer declines a pending request; no scaling occurs |
+| Problem disappears → approval cancelled | Fresh measurements invalidate an outdated pending approval |
+| Healthy service → no unnecessary action | An unnecessary restart proposal does not cause a reset |
+| Scaling without evidence → denied | ECRA rejects a scaling request without corroborating performance evidence |
+| Real Ollama AI proposes an action | A local model generates the proposal; ECRA still decides whether it is permitted |
+
+**Controlled versus AI-driven:** The first seven scenarios deliberately choose a proposal to verify policy behavior. They do **not** prove that an AI independently selected the right action. The **Real Ollama AI** scenario uses the model's actual output; its recommendation and authorization outcome can vary. The dashboard does not simulate a production restart or scale a container. `RESTART_SERVICE` means clearing an injected lab fault.
+
+### Enable real Ollama mode
+
+```bash
+docker compose -f docker-compose.lab.yml --profile ollama up --build -d
+docker compose -f docker-compose.lab.yml exec ollama ollama pull llama3.2:1b
+```
+
+Wait for the model download to finish, then select **Real Ollama AI proposes an action** in the dashboard. This uses the local Ollama service; no remote LLM API key is required. Model downloads require internet access and sufficient disk space.
+
+### Stop the lab
+
+```bash
+docker compose -f docker-compose.lab.yml --profile ollama down
+```
+
+To remove the downloaded model volume too, use `down --volumes` instead (this deletes disposable lab data and the Ollama model cache).
+
+### Troubleshooting
+
+- **Dashboard won't load:** Run `docker compose -f docker-compose.lab.yml ps` and `docker compose -f docker-compose.lab.yml logs recovery-controller`. Check that port `18080` is free.
+- **An older UI appears:** Run `git pull origin main`, rebuild with `docker compose -f docker-compose.lab.yml up --build -d recovery-controller`, and hard-refresh the browser.
+- **Reviewer token cannot be generated:** A reviewer token may already have been supplied through `SAFEIR_LAB_REVIEWER_TOKEN`, or one may already have been generated for this controller process. For a fresh disposable demo, unset that variable and recreate the controller: `unset SAFEIR_LAB_REVIEWER_TOKEN && docker compose -f docker-compose.lab.yml up --build -d --force-recreate recovery-controller`. This is a **lab convenience**, not proof of independent reviewer identity.
+- **Scenario B fails or expires:** Check the event timeline. Latency sampling can take several seconds; approvals expire according to `SAFEIR_LAB_CAPTURE_TTL` (default 10 minutes). Start a fresh run if the approval has expired.
+- **Ollama request fails:** Verify the `ollama` service is running and `llama3.2:1b` has been pulled.
+- **Docker build fails in a test:** Inspect the Maven test failure above the Docker error. Do not bypass the tests merely to get the UI running.
+
+**Safety boundary:** This UI is for a disposable, localhost-bound research lab only. The operator credential is public/demo-only; demo reviewer token generation is not production authentication. Do not expose port `18080` or connect this lab to production systems.
+
+---
 
 ## Quick start — live v0.2.0 lab
 
@@ -131,7 +196,7 @@ Modes: `RULES` (rules without ECRA), `UNGUARDED` (agent without ECRA), and `SAFE
 - Missing telemetry blocks mutation.
 - Restart requires unhealthy service and elevated errors.
 - Scale-up requires high latency or queue depth and human approval.
-- Approval-needed actions remain **unexecuted**; no approval workflow is implemented.
+- Approval-needed actions remain **unexecuted** by default; the disposable lab includes a reviewer decision workflow, but approving an unsupported action such as scaling still does not execute it.
 - `NO_OP` permitted.
 
 ## Synthetic scenarios
@@ -160,7 +225,7 @@ Modes: `RULES` (rules without ECRA), `UNGUARDED` (agent without ECRA), and `SAFE
 1. **Implemented as lab plumbing:** containerized microservices and fault injection; additional independent fault classes are still needed.
 2. **Partially implemented:** real HTTP status and latency probes and recovery after controlled fault resets; OpenTelemetry and actual production-like remediation are not implemented.
 3. **Partially implemented:** matched proposal capture/replay on a fixed lab scenario; randomized and replicated comparisons are not implemented.
-4. **Partially implemented:** external HTTP recovery verifier; human approval, rollback and true process-level recovery remain unimplemented.
+4. **Partially implemented:** external HTTP recovery verifier and lab-only human approval; durable approval audit, rollback and true process-level recovery remain unimplemented.
 5. Variability across independent workloads and documented uncertainty.
 6. Verifiable citations, a stronger literature review, and publication permission checks.
 
