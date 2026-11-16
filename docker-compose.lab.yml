@@ -41,6 +41,8 @@ services:
       SAFEIR_LAB_ENABLED: "true"
       SAFEIR_LAB_TOKEN: local-experiment-only
       SAFEIR_LAB_TEST_PROPOSALS: "true"
+      # Optional distinct reviewer credential; leave unset to disable approvals.
+      SAFEIR_LAB_REVIEWER_TOKEN: ${SAFEIR_LAB_REVIEWER_TOKEN:-}
       OLLAMA_URL: http://ollama:11434
       OLLAMA_MODEL: ${SAFEIR_OLLAMA_MODEL:-llama3.2:1b}
     ports: ["127.0.0.1:18080:8080"]
