@@ -1,0 +1,44 @@
+name: SAFE-IR v0.2.0 live lab
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: lab/pom.xml
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run lab JUnit tests
+        run: mvn -B -ntp -f lab/pom.xml clean test
+      - name: Build and start isolated lab services
+        run: docker compose -f docker-compose.lab.yml up --build -d
+      - name: Run real HTTP recovery assertions
+        run: python3 lab/experiments/verify_recovery.py --output lab/results/verification
+      - name: Generate workload observations
+        run: python3 lab/experiments/workload.py --service orders --requests 30 --interval-ms 40 --output lab/results/workload
+      - name: Capture container logs
+        if: always()
+        run: docker compose -f docker-compose.lab.yml logs --no-color > lab-docker.log 2>&1 || true
+      - name: Upload reproducibility artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: safe-ir-v0.2.0-live-lab
+          path: |
+            lab/results/
+            lab/target/surefire-reports/
+            lab-docker.log
+          if-no-files-found: warn
+      - name: Stop lab
+        if: always()
+        run: docker compose -f docker-compose.lab.yml down --volumes --remove-orphans

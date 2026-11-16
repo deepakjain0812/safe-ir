@@ -1,0 +1,43 @@
+# This stack is intentionally separate from the v0.1.0 simulator stack.
+# Test controls are bound to loopback only; never deploy this in production.
+services:
+  inventory:
+    build: ./lab
+    environment:
+      LAB_ROLE: inventory
+      LAB_TOKEN: local-experiment-only
+    ports:
+      - "127.0.0.1:18083:8080"
+    networks: [safeir-lab]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+  payments:
+    build: ./lab
+    environment:
+      LAB_ROLE: payments
+      LAB_TOKEN: local-experiment-only
+      LAB_DOWNSTREAM_URL: http://inventory:8080
+    ports:
+      - "127.0.0.1:18082:8080"
+    depends_on: [inventory]
+    networks: [safeir-lab]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+  orders:
+    build: ./lab
+    environment:
+      LAB_ROLE: orders
+      LAB_TOKEN: local-experiment-only
+      LAB_DOWNSTREAM_URL: http://payments:8080
+    ports:
+      - "127.0.0.1:18081:8080"
+    depends_on: [payments]
+    networks: [safeir-lab]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+networks:
+  safeir-lab:
+    driver: bridge

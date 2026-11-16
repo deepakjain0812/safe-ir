@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: safeir-live-lab
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+lab:
+  role: ${LAB_ROLE:orders}
+  token: ${LAB_TOKEN:local-experiment-only}
+  downstream-url: ${LAB_DOWNSTREAM_URL:}
