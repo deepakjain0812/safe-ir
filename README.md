@@ -12,41 +12,9 @@ SAFE-IR separates a replaceable remediation proposer (deterministic rules or loc
 
 ## Architecture
 
-```mermaid
-flowchart TB
-    subgraph Lab["Disposable Docker lab — loopback published ports"]
-      direction TB
-      O["Orders API :18081"] -->|HTTP /api/work| P["Payments API :18082"]
-      P -->|HTTP /api/work| I["Inventory API :18083"]
-      F["Controlled fault injector\nERROR / LATENCY / NONE"] -.-> O
-      F -.-> P
-      F -.-> I
-    end
+<img width="1664" height="977" alt="image" src="https://github.com/user-attachments/assets/ce15818d-966c-4187-b7b0-d1d879acd7ea" />
 
-    subgraph C["SAFE-IR Recovery Controller :18080 — lab-only"]
-      direction TB
-      T["Observed HTTP status + request latency\n5 fresh service probes"]
-      Q{"One captured proposal"}
-      R["Rules proposer"]
-      L["Local Ollama proposer\noptional model-backed run"]
-      T --> R
-      T --> L
-      R --> Q
-      L --> Q
-      Q --> B["Baseline arm\n(no ECRA)"]
-      Q --> E["ECRA arm\nALLOW / DENY / REQUIRE_APPROVAL"]
-      B --> X["Restricted executor\nonly approved lab fault reset"]
-      E --> X
-    end
 
-    O -.->|live probes| T
-    P -.->|live probes| T
-    I -.->|live probes| T
-    X -->|reset only specified lab service| F
-    V["External Python HTTP verifier\nOrders end-to-end checks\npre/post probes + scenario rubric"]
-    O -->|observed HTTP results| V
-    X -.->|action decision / audit result| V
-```
 
 **Diagram boundaries:** Each trial arm starts from a freshly reinjected fault and reuses the *same captured proposal*. The arms run sequentially; they are not a randomized study. ECRA does not grant arbitrary host or Docker access. The executor only clears a lab-injected fault when permitted, and **`RESTART_SERVICE` is a simulated label for that fault reset, not a process/container restart**. The external verifier checks actual HTTP responses, not a recovery oracle. There is no OpenTelemetry collector, human-approval workflow, production executor, or live infrastructure restoration.
 
