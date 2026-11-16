@@ -111,7 +111,7 @@ experiments/   Python HTTP checks and CSV/JSON runner
 
 **Publication:** Verify employer intellectual-property and external-publication requirements before treating this repository as a citable research artifact.
 
-## How to cite
+## Citation
 
 D. K. Jain, "SAFE-IR: Evidence-Constrained Authorization for Agentic Incident Recovery," Zenodo, preprint, Nov. 2026, doi: 10.5281/zenodo.24285121.
 
