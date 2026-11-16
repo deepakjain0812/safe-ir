@@ -69,6 +69,7 @@ public class LiveRecoveryController {
     // Configure a separate reviewer credential explicitly; empty disables approvals.
     @Value("${safeir.lab.reviewer-token:}")
     private String reviewerToken = "";
+    private final java.util.concurrent.atomic.AtomicReference<String> demoReviewerToken = new java.util.concurrent.atomic.AtomicReference<>();
 
     public LiveRecoveryController(@Value("${safeir.lab.token}") String token,
                                   ObjectMapper mapper, RuleBasedAgent rules,
@@ -87,6 +88,10 @@ public class LiveRecoveryController {
     }
 
     private boolean reviewerAuthorized(String supplied) {
+        String active = demoReviewerToken.get();
+        if (active != null && supplied != null && java.security.MessageDigest.isEqual(
+            supplied.getBytes(java.nio.charset.StandardCharsets.UTF_8),
+            active.getBytes(java.nio.charset.StandardCharsets.UTF_8))) return true;
         return reviewerToken != null && !reviewerToken.isBlank() && supplied != null
             && !reviewerToken.equals(token) && java.security.MessageDigest.isEqual(
                 supplied.getBytes(java.nio.charset.StandardCharsets.UTF_8),
@@ -235,6 +240,31 @@ public class LiveRecoveryController {
         }
     }
     public record DemoFaultRequest(String service, String mode, int delayMs) {}
+
+
+    /**
+     * Disposable demo convenience only. This is not independent human identity verification:
+     * anyone holding the lab operator token can bootstrap a demo reviewer.
+     * Never expose this controller beyond localhost or use it in production.
+     */
+    @PostMapping("/demo/reviewer")
+    public ResponseEntity<?> createDemoReviewer(
+        @RequestHeader(value = "X-Lab-Token", required = false) String credential) {
+        if (!authorized(credential)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        if (!allowTestProposals) return ResponseEntity.status(HttpStatus.FORBIDDEN)
+            .body(Map.of("error", "Demo reviewer generation disabled"));
+        if (reviewerToken != null && !reviewerToken.isBlank())
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of("error", "A reviewer token is already configured by the server"));
+        byte[] bytes = new byte[32];
+        new java.security.SecureRandom().nextBytes(bytes);
+        String generated = java.util.HexFormat.of().formatHex(bytes);
+        if (!demoReviewerToken.compareAndSet(null, generated))
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of("error", "Demo reviewer already generated; restart controller to reset"));
+        return ResponseEntity.ok(Map.of("reviewerToken", generated,
+            "warning", "Lab-only demonstration credential, not independent reviewer identity"));
+    }
 
     /** Lab reviewer API: separate credential; no approval can override policy or executor. */
     @GetMapping("/approval/{captureId}")
