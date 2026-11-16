@@ -5,6 +5,10 @@ on:
 jobs:
   replay:
     runs-on: ubuntu-latest
+    env:
+      SAFEIR_LAB_REVIEWER_TOKEN: ci-only-distinct-reviewer-token
+      SAFEIR_LAB_CAPTURE_TTL: PT45S
+      SAFEIR_TEST_TTL_SECONDS: "45"
     permissions:
       contents: read
     steps:
@@ -34,6 +38,8 @@ jobs:
         run: python3 -m unittest discover -s lab/experiments -p 'test_*.py' -v
       - name: Run expanded fault and adversarial replay matrix
         run: python3 lab/experiments/expanded_replay.py --output lab/results/expanded
+      - name: Verify ALLOW, DENY and human approval lifecycle against live lab
+        run: python3 lab/experiments/approval_integration.py
       - name: Capture Docker logs
         if: always()
         run: docker compose -f docker-compose.lab.yml logs --no-color > live-policy-docker.log 2>&1 || true
