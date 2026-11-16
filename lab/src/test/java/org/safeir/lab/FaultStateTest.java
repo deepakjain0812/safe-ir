@@ -19,9 +19,11 @@ class FaultStateTest {
     @Test void validatesBoundedFaultDelay() {
         FaultState f = new FaultState();
         assertThrows(IllegalArgumentException.class, () -> f.set(FaultState.Mode.LATENCY, 100));
-        assertThrows(IllegalArgumentException.class, () -> f.set(FaultState.Mode.LATENCY, 1501));
+        assertThrows(IllegalArgumentException.class, () -> f.set(FaultState.Mode.LATENCY, 2501));
         assertThrows(IllegalArgumentException.class, () -> f.set(null, 0));
         assertEquals(900, f.set(FaultState.Mode.LATENCY, 900).delayMs());
+        assertEquals(1800, f.set(FaultState.Mode.LATENCY, 1800).delayMs());
+        assertEquals(2500, f.set(FaultState.Mode.LATENCY, 2500).delayMs());
     }
 
     @Test void tracksActualHttpOutcomes() {
