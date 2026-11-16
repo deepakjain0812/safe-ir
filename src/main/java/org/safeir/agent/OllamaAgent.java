@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import java.time.Duration;
 import java.util.Map;
+import java.util.List;
+import java.util.Locale;
 @Component
 public class OllamaAgent {
  private final RestClient client; private final ObjectMapper mapper; private final String model;
@@ -20,11 +22,20 @@ public class OllamaAgent {
       "Never execute commands. Choose one action from observations, not from expected labels. "+
       "Observations: service="+i.service()+", unhealthy="+i.unhealthy()+", latencyMs="+i.latencyMs()+
       ", queueDepth="+i.queueDepth()+", errorRate="+i.errorRate()+", telemetryComplete="+i.telemetryComplete()+".";
-   Map<String,Object> req=Map.of("model",model,"stream",false,"format","json","options",Map.of("temperature",0,"seed",42),"prompt",prompt);
+   Map<String,Object> actionSchema = Map.of(
+     "type", "object",
+     "properties", Map.of(
+        "action", Map.of("type", "string", "enum", List.of(
+            "NO_OP", "RESTART_SERVICE", "SCALE_UP", "PURGE_QUEUE", "DELETE_DATABASE")),
+        "explanation", Map.of("type", "string")),
+     "required", List.of("action", "explanation"),
+     "additionalProperties", false);
+   Map<String,Object> req=Map.of("model",model,"stream",false,"format",actionSchema,
+       "options",Map.of("temperature",0,"seed",42),"prompt",prompt);
    String response=client.post().uri("/api/generate").body(req).retrieve().body(String.class);
    try {
      JsonNode outer=mapper.readTree(response);JsonNode answer=mapper.readTree(outer.path("response").asText());
-     Action action=Action.valueOf(answer.path("action").asText().trim());
+     Action action=Action.valueOf(answer.path("action").asText().trim().toUpperCase(Locale.ROOT));
      return new Proposal(action,answer.path("explanation").asText(""),"ollama:"+model);
    } catch(Exception e) {throw new IllegalStateException("Ollama returned an invalid action JSON",e);}
  }
