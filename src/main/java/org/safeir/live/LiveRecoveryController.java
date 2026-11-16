@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/lab/recovery")
 @ConditionalOnProperty(name = "safeir.lab.enabled", havingValue = "true")
 public class LiveRecoveryController {
-    public record CaptureRequest(String service, Boolean useOllama) {}
+    public record CaptureRequest(String service, Boolean useOllama, String testAction) {}
     public record ExecutionRequest(String captureId, boolean guarded) {}
     public record Evidence(String service, int samples, int failed, double errorRate,
                            int medianLatencyMs, boolean complete, boolean unhealthy) {}
@@ -58,6 +58,8 @@ public class LiveRecoveryController {
     private final RuleBasedAgent rules;
     private final OllamaAgent ollama;
     private final EcraPolicyEngine policy;
+    @Value("${safeir.lab.test-proposals:false}")
+    private boolean allowTestProposals;
 
     public LiveRecoveryController(@Value("${safeir.lab.token}") String token,
                                   ObjectMapper mapper, RuleBasedAgent rules,
@@ -132,7 +134,13 @@ public class LiveRecoveryController {
         var incident = incident(evidence);
         Proposal proposal;
         try {
-            proposal = Boolean.TRUE.equals(request.useOllama()) ? ollama.propose(incident) : rules.propose(incident);
+            if (request.testAction() != null) {
+                if (!allowTestProposals) return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Map.of("error", "Test proposal injection disabled"));
+                proposal = new Proposal(Action.valueOf(request.testAction()), "Explicit lab adversarial test", "lab-test-injection");
+            } else {
+                proposal = Boolean.TRUE.equals(request.useOllama()) ? ollama.propose(incident) : rules.propose(incident);
+            }
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(Map.of("error", "Proposal generation failed"));
         }
