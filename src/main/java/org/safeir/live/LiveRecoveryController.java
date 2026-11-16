@@ -213,6 +213,29 @@ public class LiveRecoveryController {
             capture.proposal().action().name(), decision.decision().name(), reason,
             applied, verified, before, after, (System.nanoTime() - start) / 1_000_000));
     }
+
+    /** Same-origin UI helper, restricted to the three fixed disposable lab services. */
+    @PostMapping("/demo/fault")
+    public ResponseEntity<?> demoFault(
+        @RequestHeader(value = "X-Lab-Token", required = false) String credential,
+        @RequestBody DemoFaultRequest body) {
+        if (!authorized(credential)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        if (body == null || body.service() == null || !HOSTS.containsKey(body.service())
+            || body.mode() == null || !Set.of("NONE", "ERROR", "LATENCY").contains(body.mode())
+            || body.delayMs() < 0 || body.delayMs() > 2500
+            || ("LATENCY".equals(body.mode()) && body.delayMs() < 200)) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Invalid lab fault"));
+        }
+        try {
+            String payload = mapper.writeValueAsString(Map.of("mode", body.mode(), "delayMs", body.delayMs()));
+            var response = request(host(body.service()) + "/lab/admin/fault", payload, true);
+            return ResponseEntity.status(response.statusCode()).body(response.body());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(Map.of("error", "Lab service unavailable"));
+        }
+    }
+    public record DemoFaultRequest(String service, String mode, int delayMs) {}
+
     /** Lab reviewer API: separate credential; no approval can override policy or executor. */
     @GetMapping("/approval/{captureId}")
     public ResponseEntity<?> approval(@RequestHeader(value = "X-Reviewer-Token", required = false) String credential,
