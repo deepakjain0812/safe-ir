@@ -1,13 +1,11 @@
-# This stack is intentionally separate from the v0.1.0 simulator stack.
-# Test controls are bound to loopback only; never deploy this in production.
+# Isolated laboratory. Never connect to production networks.
 services:
   inventory:
     build: ./lab
     environment:
       LAB_ROLE: inventory
       LAB_TOKEN: local-experiment-only
-    ports:
-      - "127.0.0.1:18083:8080"
+    ports: ["127.0.0.1:18083:8080"]
     networks: [safeir-lab]
     read_only: true
     tmpfs: [/tmp]
@@ -18,8 +16,7 @@ services:
       LAB_ROLE: payments
       LAB_TOKEN: local-experiment-only
       LAB_DOWNSTREAM_URL: http://inventory:8080
-    ports:
-      - "127.0.0.1:18082:8080"
+    ports: ["127.0.0.1:18082:8080"]
     depends_on: [inventory]
     networks: [safeir-lab]
     read_only: true
@@ -31,13 +28,34 @@ services:
       LAB_ROLE: orders
       LAB_TOKEN: local-experiment-only
       LAB_DOWNSTREAM_URL: http://payments:8080
-    ports:
-      - "127.0.0.1:18081:8080"
+    ports: ["127.0.0.1:18081:8080"]
     depends_on: [payments]
     networks: [safeir-lab]
     read_only: true
     tmpfs: [/tmp]
     security_opt: ["no-new-privileges:true"]
+  recovery-controller:
+    build: .
+    user: "10001:10001"
+    environment:
+      SAFEIR_LAB_ENABLED: "true"
+      SAFEIR_LAB_TOKEN: local-experiment-only
+      OLLAMA_URL: http://ollama:11434
+      OLLAMA_MODEL: llama3.2:3b
+    ports: ["127.0.0.1:18080:8080"]
+    depends_on: [orders, payments, inventory]
+    networks: [safeir-lab]
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+  ollama:
+    image: ollama/ollama:0.12.10
+    profiles: [ollama]
+    ports: ["127.0.0.1:11434:11434"]
+    volumes: [ollama-lab:/root/.ollama]
+    networks: [safeir-lab]
 networks:
   safeir-lab:
     driver: bridge
+volumes:
+  ollama-lab:

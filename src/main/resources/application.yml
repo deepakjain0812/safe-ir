@@ -12,3 +12,6 @@ safeir:
   ollama:
     url: ${OLLAMA_URL:http://localhost:11434}
     model: ${OLLAMA_MODEL:llama3.2:3b}
+  lab:
+    enabled: ${SAFEIR_LAB_ENABLED:false}
+    token: ${SAFEIR_LAB_TOKEN:disabled}
