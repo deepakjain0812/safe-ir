@@ -40,4 +40,4 @@ services:
     security_opt: ["no-new-privileges:true"]
 networks:
   safeir-lab:
-    internal: true
+    driver: bridge
