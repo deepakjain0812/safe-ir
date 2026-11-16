@@ -16,8 +16,8 @@ public class FaultState {
     public Snapshot snapshot() { return current.get(); }
 
     public synchronized Snapshot set(Mode mode, long delayMs) {
-        if (mode == null || delayMs < 0 || delayMs > 1500) {
-            throw new IllegalArgumentException("Invalid fault mode or delay (0-1500 ms)");
+        if (mode == null || delayMs < 0 || delayMs > 2500) {
+            throw new IllegalArgumentException("Invalid fault mode or delay (0-2500 ms)");
         }
         if (mode == Mode.LATENCY && delayMs < 200) {
             throw new IllegalArgumentException("Latency fault must delay at least 200 ms");
