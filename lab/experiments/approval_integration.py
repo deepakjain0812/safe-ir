@@ -107,13 +107,12 @@ try:
     print("PASS B3", flush=True)
 
     print("B4: expired request cannot be approved", flush=True)
-    fault("NONE")
-    cid = capture("SCALE_UP")
-    # Capture is intentionally not executed; no pending approval is created.
-    # Expiry is asserted on the execution endpoint instead.
+    cid = pending_scaling()
     time.sleep(TTL + 2)
-    status, result = call(BASE + "/execute", {"captureId": cid, "guarded": True})
-    require(status == 400 and result.get("error") == "Expired or unknown proposal", (status, result))
+    status, result = decide(cid, True)
+    require(status == 409 and result.get("error") == "Approval expired", (status, result))
+    status, record = approval(cid)
+    require(status == 200 and record["status"] == "EXPIRED", (status, record))
     print("PASS B4", flush=True)
     print("PASS: all SAFE-IR live authorization scenarios", flush=True)
 finally:
