@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use SAFE-IR in a publication, please cite the preprint below. The synthetic evidence package is archived at https://doi.org/10.5281/zenodo.24206339."
+title: "SAFE-IR: Evidence-Constrained Agentic Incident Recovery"
+type: software
+authors:
+  - family-names: Jain
+    given-names: Deepak Kumar
+    affiliation: Hitachi Digital
+    orcid: "https://orcid.org/0009-0003-5714-6641"
+repository-code: "https://github.com/deepakjain0812/safe-ir"
+url: "https://github.com/deepakjain0812/safe-ir/releases/tag/v0.1.0"
+version: 0.1.0
+date-released: "2026-11-13"
+preferred-citation:
+  type: generic
+  title: "SAFE-IR: Evidence-Constrained Authorization for Agentic Incident Recovery"
+  authors:
+    - family-names: Jain
+      given-names: Deepak Kumar
+      orcid: "https://orcid.org/0009-0003-5714-6641"
+  year: 2026
+  publisher: Zenodo
+  doi: "10.5281/zenodo.24285121"
+  url: "https://doi.org/10.5281/zenodo.24285121"
