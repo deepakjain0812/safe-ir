@@ -139,3 +139,14 @@ decisions, reject stale evidence on re-evaluation, and audit approvals and
 rejections. An approval must **never** override `DENY` or enable unsupported
 executor actions. Until a restricted scaling executor exists, an approved
 scaling proposal must remain **not applied / not verified**.
+
+## Milestone 3: reviewer decision API (experimental)
+
+Set a separate nonempty `SAFEIR_LAB_REVIEWER_TOKEN` environment variable **before** starting Compose. It must differ from `SAFEIR_LAB_TOKEN`. Never use production credentials. Approval endpoints are disabled by default.
+
+1. Inject a latency fault exceeding 1500 ms, then capture a `SCALE_UP` proposal using `testAction` (lab test injection only).
+2. POST `/lab/recovery/execute` with `{"captureId":"<id>","guarded":true}`; this returns `REQUIRE_APPROVAL`, does not mutate the service, and creates a pending record.
+3. GET `/lab/recovery/approval/<id>` with `X-Reviewer-Token` to inspect it.
+4. POST `/lab/recovery/approval/decide` with `X-Reviewer-Token` and `{"captureId":"<id>","approve":true,"reason":"Lab review"}` (or `approve:false`).
+
+The reviewer decision is single-use, bound to the capture, expires with the 10-minute capture window, and fresh evidence is re-evaluated. An approved scaling action remains **not applied / not verified** because the restricted lab executor does not support scaling. The approval ledger is in memory and is lost on restart; this is not a durable production audit trail. Reviewer authentication uses a static lab-only token, not enterprise identity.
