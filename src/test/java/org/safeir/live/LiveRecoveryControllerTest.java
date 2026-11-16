@@ -15,12 +15,12 @@ class LiveRecoveryControllerTest {
         new ObjectMapper(), new RuleBasedAgent(), mock(OllamaAgent.class), new EcraPolicyEngine());
 
     @Test void blocksUnauthenticatedCapture() {
-        var result = controller.capture(null, new LiveRecoveryController.CaptureRequest("orders", false));
+        var result = controller.capture(null, new LiveRecoveryController.CaptureRequest("orders", false, null));
         assertEquals(HttpStatus.FORBIDDEN, result.getStatusCode());
     }
     @Test void rejectsNonAllowlistedTargetsBeforeAnyRequest() {
         var result = controller.capture("test-only",
-            new LiveRecoveryController.CaptureRequest("http://production", false));
+            new LiveRecoveryController.CaptureRequest("http://production", false, null));
         assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
     }
     @Test void rejectsUnknownCaptureAndDoesNotExecute() {

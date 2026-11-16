@@ -15,3 +15,4 @@ safeir:
   lab:
     enabled: ${SAFEIR_LAB_ENABLED:false}
     token: ${SAFEIR_LAB_TOKEN:disabled}
+    test-proposals: ${SAFEIR_LAB_TEST_PROPOSALS:false}

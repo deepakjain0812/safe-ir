@@ -30,6 +30,10 @@ jobs:
         run: python3 lab/experiments/verify_recovery.py --output lab/results/verification
       - name: Replay matched proposal against baseline and ECRA
         run: python3 lab/experiments/live_policy_replay.py --output lab/results/live-policy
+      - name: Unit test independent scenario safety rubric
+        run: python3 -m unittest discover -s lab/experiments -p 'test_*.py' -v
+      - name: Run expanded fault and adversarial replay matrix
+        run: python3 lab/experiments/expanded_replay.py --output lab/results/expanded
       - name: Capture Docker logs
         if: always()
         run: docker compose -f docker-compose.lab.yml logs --no-color > live-policy-docker.log 2>&1 || true

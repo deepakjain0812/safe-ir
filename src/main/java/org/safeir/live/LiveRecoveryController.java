@@ -38,7 +38,7 @@ public class LiveRecoveryController {
     public record Captured(String id, String service, Proposal proposal, Instant created,
                            Set<String> arms) {}
     public record CaptureResponse(String captureId, String service, String action,
-                                  String proposalSource, Evidence evidence) {}
+                                  String proposalSource, String proposalExplanation, Evidence evidence) {}
     public record ExecutionResponse(String captureId, String arm, String action,
                                     String decision, String reason, boolean applied,
                                     boolean verified, Evidence before, Evidence after,
@@ -140,7 +140,7 @@ public class LiveRecoveryController {
         captures.put(id, new Captured(id, request.service(), proposal, Instant.now(),
             ConcurrentHashMap.newKeySet()));
         return ResponseEntity.ok(new CaptureResponse(id, request.service(),
-            proposal.action().name(), proposal.source(), evidence));
+            proposal.action().name(), proposal.source(), proposal.explanation(), evidence));
     }
 
     @PostMapping("/execute")

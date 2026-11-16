@@ -2,6 +2,12 @@ name: SAFE-IR v0.2.0 live lab
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      run_ollama:
+        description: "Run a real Ollama inference matrix (requires model download)"
+        required: false
+        type: boolean
+        default: false
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -26,6 +32,16 @@ jobs:
         run: python3 lab/experiments/verify_recovery.py --output lab/results/verification
       - name: Generate workload observations
         run: python3 lab/experiments/workload.py --service orders --requests 30 --interval-ms 40 --output lab/results/workload
+      - name: Run actual Ollama model inference (manual opt-in)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_ollama }}
+        run: |
+          mkdir -p lab/results/ollama
+          docker compose -f docker-compose.lab.yml --profile ollama up -d ollama
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama pull llama3.2:1b
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama --version > lab/results/ollama/version.txt
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama list > lab/results/ollama/models.txt
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama show llama3.2:1b > lab/results/ollama/model-details.txt
+          python3 lab/experiments/expanded_replay.py --ollama --output lab/results/ollama
       - name: Capture container logs
         if: always()
         run: docker compose -f docker-compose.lab.yml logs --no-color > lab-docker.log 2>&1 || true

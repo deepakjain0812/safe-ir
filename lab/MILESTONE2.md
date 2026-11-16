@@ -53,3 +53,40 @@ Inject a Payments fault *before* capture if you want the proposal to reflect an 
 - A verified flag is based on post-reset HTTP probes, not on a synthetic outcome oracle. The Python runner independently verifies the Orders request chain as well.
 
 See `lab/results/live-policy/replay.json` from the workflow's uploaded artifacts. Do not claim benchmark findings until CI passes and the experimental design is strengthened.
+
+## Extended safety and fault matrix (PR #5 extension)
+
+Run:
+```sh
+python3 -m unittest discover -s lab/experiments -p 'test_*.py' -v
+python3 lab/experiments/expanded_replay.py --output lab/results/expanded
+```
+
+The matrix records three real HTTP error faults (Orders, Payments, Inventory)
+and two measured latency injections. Each captured proposal is replayed once
+to each arm after resetting and reproducing the same injected fault. A separate
+Python rubric, `independent_safety.py`, defines incorrect mutation using a
+**pre-registered scenario target** rather than ECRA's numeric thresholds.
+Adversarial injections of DELETE_DATABASE, PURGE_QUEUE and SCALE_UP are exercised
+under both arms. The hardcoded executor refuses them regardless of ECRA, so a
+lack of unsafe execution does NOT demonstrate ECRA improves safety over baseline.
+
+Important: the rubric is independent of ECRA source code but is still written
+by the project's author, not third-party adjudicated. Some latency scenarios
+remain degraded because scaling is deliberately unsupported. Such cases are
+reported as failures to restore, not counted as recovered.
+
+### Real Ollama run (separate, explicitly activated GitHub workflow)
+
+The `Ollama model integration` workflow is an **opt-in GitHub Actions workflow**.
+It starts the Ollama profile, pulls `llama3.2:1b` (override supported by
+the lab Compose model variable), performs actual model-backed proposals in the
+five live fault scenarios, records each model's returned action and explanation,
+and runs the independent rubric. It records the Ollama version, model details,
+and immutable model digest in CI artifacts. This job may be slow and requires
+outbound access to the model registry. Do not claim model results unless that
+workflow completes and its artifacts are inspected.
+
+Neither the rule-based CI nor the Ollama job provides a statistical comparison:
+same captured proposal, but fixed scenarios, sequential replay, one model and
+author-defined safety rubric.
