@@ -1,0 +1,41 @@
+name: SAFE-IR real Ollama inference smoke
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  inference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build disposable services and start Ollama
+        run: docker compose -f docker-compose.lab.yml --profile ollama up --build -d
+      - name: Pull real inference model and record immutable reference
+        run: |
+          mkdir -p lab/results/ollama
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama pull llama3.2:1b
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama --version > lab/results/ollama/version.txt
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama list > lab/results/ollama/models.txt
+          docker compose -f docker-compose.lab.yml exec -T ollama ollama show llama3.2:1b > lab/results/ollama/model-details.txt
+      - name: Generate and replay real Ollama proposal
+        run: python3 lab/experiments/ollama_smoke.py
+      - name: Collect Docker logs
+        if: always()
+        run: docker compose -f docker-compose.lab.yml --profile ollama logs --no-color > ollama-docker.log 2>&1 || true
+      - name: Upload inference evidence and failure logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: safe-ir-real-ollama-smoke
+          path: |
+            lab/results/ollama/
+            ollama-docker.log
+          if-no-files-found: warn
+      - name: Remove lab
+        if: always()
+        run: docker compose -f docker-compose.lab.yml --profile ollama down --volumes --remove-orphans

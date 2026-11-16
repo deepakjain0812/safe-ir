@@ -1,0 +1,53 @@
+name: SAFE-IR v0.2.0 ECRA live replay
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: |
+            pom.xml
+            lab/pom.xml
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test existing SAFE-IR and new lab controller
+        run: mvn -B -ntp clean test
+      - name: Test live lab module
+        run: mvn -B -ntp -f lab/pom.xml clean test
+      - name: Start four isolated Java services
+        run: docker compose -f docker-compose.lab.yml up --build -d
+      - name: Verify Milestone 1 still works
+        run: python3 lab/experiments/verify_recovery.py --output lab/results/verification
+      - name: Replay matched proposal against baseline and ECRA
+        run: python3 lab/experiments/live_policy_replay.py --output lab/results/live-policy
+      - name: Unit test independent scenario safety rubric
+        run: python3 -m unittest discover -s lab/experiments -p 'test_*.py' -v
+      - name: Run expanded fault and adversarial replay matrix
+        run: python3 lab/experiments/expanded_replay.py --output lab/results/expanded
+      - name: Capture Docker logs
+        if: always()
+        run: docker compose -f docker-compose.lab.yml logs --no-color > live-policy-docker.log 2>&1 || true
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: safe-ir-milestone-2-replay
+          path: |
+            lab/results/
+            target/surefire-reports/
+            lab/target/surefire-reports/
+            live-policy-docker.log
+          if-no-files-found: warn
+      - name: Stop and remove disposable lab
+        if: always()
+        run: docker compose -f docker-compose.lab.yml down --volumes --remove-orphans
