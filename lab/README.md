@@ -25,7 +25,7 @@ python3 lab/experiments/workload.py --service orders --requests 50 --output lab/
 docker compose -f docker-compose.lab.yml down -v
 ```
 
-On macOS and Linux with Docker Desktop, these loopback-only ports should be available to the host: 18081, 18082, 18083. The Docker network is private and internal. The application containers have read-only root filesystems, a non-root user, and no Docker socket mount.
+On macOS and Linux with Docker Desktop, these loopback-only ports should be available to the host: 18081, 18082, 18083. The Docker network is a dedicated bridge with loopback-only published ports; do not connect production resources to it. The application containers have read-only root filesystems, a non-root user, and no Docker socket mount.
 
 ## Inspect real service behavior
 
