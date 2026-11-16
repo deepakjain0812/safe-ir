@@ -14,6 +14,11 @@ class LiveRecoveryControllerTest {
     LiveRecoveryController controller = new LiveRecoveryController("test-only",
         new ObjectMapper(), new RuleBasedAgent(), mock(OllamaAgent.class), new EcraPolicyEngine());
 
+    @Test void reviewerEndpointsDisabledWithoutSeparateCredential() {
+        assertEquals(HttpStatus.FORBIDDEN, controller.approval("test-only", "missing").getStatusCode());
+        assertEquals(HttpStatus.FORBIDDEN, controller.decideApproval("test-only",
+            new LiveRecoveryController.ApprovalDecisionRequest("missing", true, "test")).getStatusCode());
+    }
     @Test void blocksUnauthenticatedCapture() {
         var result = controller.capture(null, new LiveRecoveryController.CaptureRequest("orders", false, null));
         assertEquals(HttpStatus.FORBIDDEN, result.getStatusCode());
