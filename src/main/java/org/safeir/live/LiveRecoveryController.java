@@ -33,6 +33,10 @@ import org.springframework.web.bind.annotation.*;
 public class LiveRecoveryController {
     public record CaptureRequest(String service, Boolean useOllama, String testAction) {}
     public record ExecutionRequest(String captureId, boolean guarded) {}
+    public record ApprovalDecisionRequest(String captureId, boolean approve, String reason) {}
+    public record ApprovalRecord(String captureId, String service, String action, String proposalSource,
+                                 Evidence evidence, Instant created, String status, String reviewerReason,
+                                 Instant decidedAt) {}
     public record Evidence(String service, int samples, int failed, double errorRate,
                            int medianLatencyMs, boolean complete, boolean unhealthy) {}
     public record Captured(String id, String service, Proposal proposal, Instant created,
@@ -51,6 +55,7 @@ public class LiveRecoveryController {
         "payments", "http://payments:8080",
         "inventory", "http://inventory:8080");
     private final ConcurrentHashMap<String, Captured> captures = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, ApprovalRecord> approvals = new ConcurrentHashMap<>();
     private final HttpClient http = HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(2)).build();
     private final ObjectMapper mapper;
@@ -60,6 +65,9 @@ public class LiveRecoveryController {
     private final EcraPolicyEngine policy;
     @Value("${safeir.lab.test-proposals:false}")
     private boolean allowTestProposals;
+    // Configure a separate reviewer credential explicitly; empty disables approvals.
+    @Value("${safeir.lab.reviewer-token:}")
+    private String reviewerToken = "";
 
     public LiveRecoveryController(@Value("${safeir.lab.token}") String token,
                                   ObjectMapper mapper, RuleBasedAgent rules,
@@ -75,6 +83,13 @@ public class LiveRecoveryController {
         return supplied != null && java.security.MessageDigest.isEqual(
             supplied.getBytes(java.nio.charset.StandardCharsets.UTF_8),
             token.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    }
+
+    private boolean reviewerAuthorized(String supplied) {
+        return reviewerToken != null && !reviewerToken.isBlank() && supplied != null
+            && !reviewerToken.equals(token) && java.security.MessageDigest.isEqual(
+                supplied.getBytes(java.nio.charset.StandardCharsets.UTF_8),
+                reviewerToken.getBytes(java.nio.charset.StandardCharsets.UTF_8));
     }
 
     private static String host(String service) {
@@ -129,7 +144,8 @@ public class LiveRecoveryController {
         if (!authorized(credential)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         if (request == null || request.service() == null || !HOSTS.containsKey(request.service()))
             return ResponseEntity.badRequest().body(Map.of("error", "Known service required"));
-        if (captures.size() > 100) captures.clear();
+        // Expired captures are never reusable; do not clear pending audit records.
+        captures.entrySet().removeIf(e -> e.getValue().created().isBefore(Instant.now().minus(MAX_AGE)));
         var evidence = sample(request.service());
         var incident = incident(evidence);
         Proposal proposal;
@@ -171,6 +187,11 @@ public class LiveRecoveryController {
             : new PolicyResult(Decision.ALLOW, "No ECRA (lab executor boundary still enforced)", 0, 0);
         boolean applied = false;
         String reason = decision.reason();
+        if (request.guarded() && decision.decision() == Decision.REQUIRE_APPROVAL) {
+            approvals.putIfAbsent(capture.id(), new ApprovalRecord(capture.id(), capture.service(),
+                capture.proposal().action().name(), capture.proposal().source(), before,
+                Instant.now(), "PENDING", null, null));
+        }
         // No free-form commands: only a restart-like reset of an observed failing service.
         // This is a trusted fault-flag reset, NOT an actual container restart.
         if (decision.decision() == Decision.ALLOW && capture.proposal().action() == Action.RESTART_SERVICE) {
@@ -191,4 +212,63 @@ public class LiveRecoveryController {
             capture.proposal().action().name(), decision.decision().name(), reason,
             applied, verified, before, after, (System.nanoTime() - start) / 1_000_000));
     }
+    /** Lab reviewer API: separate credential; no approval can override policy or executor. */
+    @GetMapping("/approval/{captureId}")
+    public ResponseEntity<?> approval(@RequestHeader(value = "X-Reviewer-Token", required = false) String credential,
+                                      @PathVariable String captureId) {
+        if (!reviewerAuthorized(credential)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        ApprovalRecord record = approvals.get(captureId);
+        if (record == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(record);
+    }
+
+    @PostMapping("/approval/decide")
+    public ResponseEntity<?> decideApproval(
+        @RequestHeader(value = "X-Reviewer-Token", required = false) String credential,
+        @RequestBody ApprovalDecisionRequest request) {
+        if (!reviewerAuthorized(credential)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        if (request == null || request.captureId() == null || request.reason() == null
+            || request.reason().isBlank() || request.reason().length() > 500) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Capture ID and reviewer reason required (max 500 chars)"));
+        }
+        ApprovalRecord pending = approvals.get(request.captureId());
+        Captured capture = captures.get(request.captureId());
+        if (pending == null || capture == null) return ResponseEntity.notFound().build();
+        if (!pending.status().equals("PENDING")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Approval already decided"));
+        }
+        if (capture.created().isBefore(Instant.now().minus(MAX_AGE))) {
+            ApprovalRecord expired = new ApprovalRecord(pending.captureId(), pending.service(),
+                pending.action(), pending.proposalSource(), pending.evidence(), pending.created(),
+                "EXPIRED", "Capture expired", Instant.now());
+            approvals.replace(pending.captureId(), pending, expired);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Approval expired"));
+        }
+        // Reserve the decision atomically: concurrent reviewers cannot approve twice.
+        ApprovalRecord reserved = new ApprovalRecord(pending.captureId(), pending.service(),
+            pending.action(), pending.proposalSource(), pending.evidence(), pending.created(),
+            "PROCESSING", request.reason(), Instant.now());
+        if (!approvals.replace(pending.captureId(), pending, reserved)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Approval already decided"));
+        }
+        String status = request.approve() ? "APPROVED" : "REJECTED";
+        String outcome = request.approve() ? "Action not supported by restricted lab executor" : "Rejected by reviewer";
+        if (request.approve()) {
+            Evidence fresh = sample(capture.service());
+            PolicyResult reevaluated = policy.evaluate(incident(fresh), capture.proposal());
+            // A reviewer may approve only while ECRA still requires approval.
+            if (reevaluated.decision() != Decision.REQUIRE_APPROVAL) {
+                status = "INVALIDATED";
+                outcome = "Fresh evidence no longer requires approval: " + reevaluated.decision();
+            }
+            // No scaling or other unsupported mutation is performed here.
+        }
+        ApprovalRecord completed = new ApprovalRecord(reserved.captureId(), reserved.service(),
+            reserved.action(), reserved.proposalSource(), reserved.evidence(), reserved.created(),
+            status, request.reason(), Instant.now());
+        approvals.replace(reserved.captureId(), reserved, completed);
+        return ResponseEntity.ok(Map.of("approval", completed, "applied", false,
+            "verified", false, "reason", outcome));
+    }
+
 }
