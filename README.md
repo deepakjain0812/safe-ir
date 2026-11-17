@@ -1,5 +1,7 @@
 # SAFE-IR: Evidence-Constrained Authorization for Agentic Incident Recovery
 
+**Research publication:** [Full abstract and preprint PDF](https://deepakjain0812.github.io/safe-ir/publications/safe-ir.html) · [Original Zenodo DOI](https://doi.org/10.5281/zenodo.24285121) · [Research website](https://deepakjain0812.github.io/safe-ir/)
+
 **Open research prototype — v0.1.0 synthetic simulator plus v0.2.0 experimental live lab. Not suitable for production incident response.**
 
 SAFE-IR separates a replaceable remediation proposer (deterministic rules or local Ollama) from **Evidence-Constrained Remediation Authorization (ECRA)**. ECRA can `ALLOW`, `DENY`, or `REQUIRE_APPROVAL`. A restricted lab executor is deliberately separate from both the model and the policy.
