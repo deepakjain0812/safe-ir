@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://deepakjain0812.github.io/safe-ir/sitemap.xml
