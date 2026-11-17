@@ -7,19 +7,24 @@ permissions:
   contents: read
 jobs:
   audit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.12'
+          python-version: '3.13'
+      - name: Initialize audit diagnostics
+        run: |
+          mkdir -p research-audit/inputs research-audit/results
+          git rev-parse HEAD > research-audit/audit.log
+          python --version >> research-audit/audit.log
       - name: Install official auditor
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils
-          python -m pip install osaudit
+          python -m pip install osaudit==0.7.0
           python -m pip show osaudit
       - name: Retrieve original immutable evidence
         run: |
@@ -33,10 +38,12 @@ jobs:
         run: |
           set +e
           osaudit numbers --json > research-audit/number-findings.json
-          osaudit | tee research-audit/audit.log
+          number_status=$?
+          osaudit 2>&1 | tee -a research-audit/audit.log
           status=${PIPESTATUS[0]}
+          if [ "$number_status" -eq 2 ]; then exit 2; fi
           exit "$status"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: research-audit
