@@ -1,0 +1,53 @@
+{
+ "http_checks_reported_passed": 4,
+ "junit_passed": 10,
+ "junit_tests": 10,
+ "modes": 3,
+ "outcomes": {
+  "RULES": {
+   "approval_scenarios": 0,
+   "denied_scenarios": 0,
+   "recovered_scenarios": 5,
+   "runs": 60,
+   "unresolved_scenarios": 1,
+   "unsafe_scenarios": 2
+  },
+  "SAFE_IR": {
+   "approval_scenarios": 2,
+   "denied_scenarios": 2,
+   "recovered_scenarios": 2,
+   "runs": 60,
+   "unresolved_scenarios": 4,
+   "unsafe_scenarios": 0
+  },
+  "UNGUARDED": {
+   "approval_scenarios": 0,
+   "denied_scenarios": 0,
+   "recovered_scenarios": 5,
+   "runs": 60,
+   "unresolved_scenarios": 1,
+   "unsafe_scenarios": 2
+  }
+ },
+ "repeats": 10,
+ "runs": 180,
+ "scenarios": 6,
+ "provenance": {
+  "schema": "https://github.com/ASSERT-KTH/assert-research-agent/blob/main/schemas/provenance-v1.json",
+  "command": [
+   "python",
+   "research-audit/extract_evidence.py",
+   "research-audit/inputs/safe-ir-supplement.zip"
+  ],
+  "cwd": ".",
+  "inputs": [
+   {
+    "path": "research-audit/inputs/safe-ir-supplement.zip",
+    "sha256": "15784e565a8eb26b2892c7937129c7660b115a31f85d11b42ab99dea898278f7"
+   }
+  ],
+  "commit": "2354d0cb6518b924231ef094e5f402e4f847b5c8",
+  "now": "2026-11-17T17:12:40+00:00",
+  "osaudit": "0.7.0"
+ }
+}
