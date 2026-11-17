@@ -4,7 +4,7 @@ on:
     branches: [research-osaudit]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   audit:
     runs-on: ubuntu-24.04
@@ -43,6 +43,16 @@ jobs:
           status=${PIPESTATUS[0]}
           if [ "$number_status" -eq 2 ]; then exit 2; fi
           exit "$status"
+      - name: Preserve verified evidence in Git
+        if: success() && github.ref == 'refs/heads/research-osaudit'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f research-audit/inputs/safe-ir-supplement.zip research-audit/results/historical.json research-audit/number-findings.json research-audit/audit.log
+          if ! git diff --cached --quiet; then
+            git commit -m "Preserve verified historical audit evidence"
+            git push origin HEAD:research-osaudit
+          fi
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
