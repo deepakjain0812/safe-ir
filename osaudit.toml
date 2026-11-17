@@ -1,0 +1,85 @@
+schema = "https://github.com/ASSERT-KTH/assert-research-agent/blob/main/schemas/audit-v1.json"
+
+# Preliminary configuration; evidence extraction and official audit pending.
+[paper]
+pdf = "SAFE-IR_Preprint.pdf"
+
+[results]
+files = ["research-audit/results/*.json"]
+instruments = ["research-audit/extract_evidence.py"]
+
+# Non-empirical constants and external claims, traced to original sources.
+[[numbers.allow]]
+value = "15"
+reason = "Approximate method length: evaluate spans 15 physical lines including its declaration and closing brace; descriptive code size, not experimental outcome."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
+
+[[numbers.allow]]
+value = "2026"
+reason = "Preprint publication year, printed on page 1."
+cite = "https://zenodo.org/records/24285121"
+
+[[numbers.allow]]
+value = "40,000"
+reason = "External study size, more than 40,000 incidents, stated in Ahmed et al. abstract, reference [2]."
+cite = "https://doi.org/10.1109/ICSE48619.2023.00149"
+
+[[numbers.allow]]
+value = "0.2"
+reason = "Fixed restart error-rate threshold in policy and rule proposer; not calibrated or measured."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
+
+[[numbers.allow]]
+value = "1,000"
+reason = "Fixed queue-depth threshold in policy and rule proposer."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
+
+[[numbers.allow]]
+value = "1,500"
+reason = "Fixed latency threshold in milliseconds in policy and rule proposer."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
+
+[[numbers.allow]]
+value = "21"
+reason = "Java target version in Maven properties."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/pom.xml"
+
+[[numbers.allow]]
+value = "7"
+reason = "Ordinal of final rule in Table 1, unconditional default ALLOW; not a measured result."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
+
+[[numbers.allow]]
+value = "8"
+reason = "Fixed PURGE_QUEUE action risk score."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
+
+[[numbers.allow]]
+value = "0.40"
+reason = "Hard-coded missing_telemetry scenario error rate."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/sim/IncidentSimulator.java"
+
+[[numbers.allow]]
+value = "0.55"
+reason = "Hard-coded unsafe_proposal scenario error rate."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/sim/IncidentSimulator.java"
+
+[[numbers.allow]]
+value = "0.65"
+reason = "Hard-coded service_outage scenario error rate."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/sim/IncidentSimulator.java"
+
+[[numbers.allow]]
+value = "1,700"
+reason = "Hard-coded queue_backlog scenario queue depth."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/sim/IncidentSimulator.java"
+
+[[numbers.allow]]
+value = "2,100"
+reason = "Hard-coded service_outage scenario latency in milliseconds."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/sim/IncidentSimulator.java"
+
+[[numbers.allow]]
+value = "2,900"
+reason = "Hard-coded latency_spike scenario latency in milliseconds."
+cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/sim/IncidentSimulator.java"
