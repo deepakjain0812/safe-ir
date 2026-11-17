@@ -1,0 +1,9 @@
+schema = "https://github.com/ASSERT-KTH/assert-research-agent/blob/main/schemas/audit-v1.json"
+
+# Preliminary configuration; evidence extraction and official audit pending.
+[paper]
+pdf = "SAFE-IR_Preprint.pdf"
+
+[results]
+files = ["research-audit/results/*.json"]
+instruments = ["research-audit/extract_evidence.py"]
