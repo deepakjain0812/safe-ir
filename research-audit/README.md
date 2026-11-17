@@ -1,6 +1,6 @@
 # SAFE-IR v0.1.0 research audit
 
-Status: preliminary evidence verification; official osaudit not yet run.
+Status: author-side official osaudit 0.7.0 passed (November 17, 2026). Independent endorsement review remains pending.
 
 The November 2026 preprint describes the synthetic v0.1.0 release, not the later live lab. Original source commit: bfb0f5a89c212634c268e2e42adbe85cb07190c8.
 
@@ -14,4 +14,23 @@ All 16 internal manifest entries verified against the supplied supplement. Recou
 
 These are historical, deterministic synthetic observations, not independent trials or production restoration measurements. No retrospective preregistration or historical osaudit provenance is asserted.
 
-Remaining: stage the exact paper and original evidence, create a reproducible extraction instrument and audit configuration, check all paper numbers and citations, run the official auditor, resolve findings, and verify endorsement eligibility. Do not interpret this preliminary verification as an official audit pass.
+## Reproduce the audit
+
+From the repository root, using Python 3.13 and Poppler pdftotext:
+
+```bash
+python -m pip install osaudit==0.7.0
+osaudit run --input research-audit/inputs/safe-ir-supplement.zip -o research-audit/results/historical.json -- python research-audit/extract_evidence.py research-audit/inputs/safe-ir-supplement.zip
+osaudit numbers --json
+osaudit
+```
+
+- [Successful CI run](https://github.com/deepakjain0812/safe-ir/actions/runs/44133782380)
+- [Historical results and provenance](results/historical.json)
+- [Numerical findings](number-findings.json)
+- [Audit log](audit.log)
+- [Claim ledger](../PAPER-NUMBERS.csv)
+- [Evidence guide](../CLAIMS-EVIDENCE.md)
+
+The original ZIP is retained byte-for-byte; the new provenance documents retrospective extraction, not historical execution. The author-side audit is not independent endorsement.
+
