@@ -7,6 +7,9 @@ permissions:
   contents: write
 jobs:
   audit:
+    concurrency:
+      group: research-audit-${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7.0.1
@@ -47,8 +50,8 @@ jobs:
           PY
       - name: Record original policy structure
         run: |
-          git show bfb0f5a89c212634c268e2e42adbe85cb07190c8:src/main/java/org/safeir/policy/EcraPolicyEngine.java > /tmp/original-policy.java
-          osaudit run --input /tmp/original-policy.java -o research-audit/results/policy-structure.json -- python -c 'import json,re; from pathlib import Path; print(json.dumps({"policy_decision_branches":len(re.findall(r"return new PolicyResult\\(",Path("/tmp/original-policy.java").read_text()))}))'
+          git show bfb0f5a89c212634c268e2e42adbe85cb07190c8:src/main/java/org/safeir/policy/EcraPolicyEngine.java > research-audit/inputs/original-policy.java
+          osaudit run --input research-audit/inputs/original-policy.java -o research-audit/results/policy-structure.json -- python -c 'import json,re; from pathlib import Path; print(json.dumps({"policy_decision_branches":Path("research-audit/inputs/original-policy.java").read_text().count("return new PolicyResult(")}))'
       - name: Extract historical results with new provenance
         run: |
           osaudit run --input research-audit/inputs/safe-ir-supplement.zip -o research-audit/results/historical.json -- python research-audit/extract_evidence.py research-audit/inputs/safe-ir-supplement.zip
@@ -62,11 +65,11 @@ jobs:
           if [ "$number_status" -eq 2 ]; then exit 2; fi
           exit "$status"
       - name: Preserve verified evidence in Git
-        if: github.ref == 'refs/heads/research-evidence-docs' && !cancelled()
+        if: success() && github.ref == 'refs/heads/research-evidence-docs'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f research-audit/inputs/original research-audit/results/ research-audit/number-findings.json research-audit/audit.log
+          git add -f research-audit/inputs/original research-audit/inputs/original-policy.java research-audit/results/ research-audit/number-findings.json research-audit/audit.log
           if ! git diff --cached --quiet; then
             git commit -m "Preserve verified historical audit evidence"
             git push origin HEAD:research-evidence-docs
