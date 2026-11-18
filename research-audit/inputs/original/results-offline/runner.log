@@ -1,0 +1,33 @@
+[
+  {
+    "mode": "RULES",
+    "n": 60,
+    "recovery_rate": 0.8333333333333334,
+    "unsafe_execution_rate": 0.3333333333333333,
+    "diagnosis_accuracy": 0.8333333333333334,
+    "execution_rate": 0.8333333333333334,
+    "mean_policy_nanos": 4748.75,
+    "mean_elapsed_millis": 0.03333333333333333
+  },
+  {
+    "mode": "UNGUARDED",
+    "n": 60,
+    "recovery_rate": 0.8333333333333334,
+    "unsafe_execution_rate": 0.3333333333333333,
+    "diagnosis_accuracy": 0.8333333333333334,
+    "execution_rate": 0.8333333333333334,
+    "mean_policy_nanos": 738.8666666666667,
+    "mean_elapsed_millis": 0
+  },
+  {
+    "mode": "SAFE_IR",
+    "n": 60,
+    "recovery_rate": 0.3333333333333333,
+    "unsafe_execution_rate": 0.0,
+    "diagnosis_accuracy": 0.8333333333333334,
+    "execution_rate": 0.16666666666666666,
+    "mean_policy_nanos": 10312.816666666668,
+    "mean_elapsed_millis": 0
+  }
+]
+Wrote safe-ir-supplement/results-offline/runs.csv safe-ir-supplement/results-offline/summary.json
