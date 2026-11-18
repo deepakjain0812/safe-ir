@@ -1,0 +1,45 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< org.safeir:safe-ir >-------------------------
+[INFO] Building SAFE-IR 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ safe-ir ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ safe-ir ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ safe-ir ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 9 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ safe-ir ---
+[INFO] skip non existing resourceDirectory /home/runner/work/safe-ir/safe-ir/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ safe-ir ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ safe-ir ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.safeir.service.ExperimentServiceTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s -- in org.safeir.service.ExperimentServiceTest
+[INFO] Running org.safeir.policy.EcraPolicyEngineTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in org.safeir.policy.EcraPolicyEngineTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.523 s
+[INFO] Finished at: 2026-11-13T19:07:43Z
+[INFO] ------------------------------------------------------------------------

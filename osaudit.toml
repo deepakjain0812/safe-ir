@@ -1,6 +1,6 @@
 schema = "https://github.com/ASSERT-KTH/assert-research-agent/blob/main/schemas/audit-v1.json"
 
-# Preliminary configuration; evidence extraction and official audit pending.
+# Author-side audit passed with osaudit 0.7.0; independent review pending.
 [paper]
 pdf = "SAFE-IR_Preprint.pdf"
 

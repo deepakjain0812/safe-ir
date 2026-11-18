@@ -1,12 +1,15 @@
 name: Research audit
 on:
   push:
-    branches: [research-osaudit]
+    branches: [research-osaudit, research-evidence-docs]
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
   audit:
+    concurrency:
+      group: research-audit-${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7.0.1
@@ -31,6 +34,24 @@ jobs:
           mkdir -p research-audit/inputs research-audit/results
           curl --fail --location --retry 3 https://github.com/deepakjain0812/safe-ir/releases/download/v0.1.0/safe-ir-supplement.zip -o research-audit/inputs/safe-ir-supplement.zip
           echo '15784e565a8eb26b2892c7937129c7660b115a31f85d11b42ab99dea898278f7  research-audit/inputs/safe-ir-supplement.zip' | sha256sum -c -
+      - name: Publish original raw evidence
+        run: |
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path, PurePosixPath
+          with zipfile.ZipFile("research-audit/inputs/safe-ir-supplement.zip") as z:
+              for n in z.namelist():
+                  p = PurePosixPath(n)
+                  if n.endswith("/") or p.parts[0] != "safe-ir-supplement" or ".." in p.parts:
+                      continue
+                  dest = Path("research-audit/inputs/original").joinpath(*p.parts[1:])
+                  dest.parent.mkdir(parents=True, exist_ok=True)
+                  dest.write_bytes(z.read(n))
+          PY
+      - name: Record original policy structure
+        run: |
+          git show bfb0f5a89c212634c268e2e42adbe85cb07190c8:src/main/java/org/safeir/policy/EcraPolicyEngine.java > research-audit/inputs/original-policy.java
+          osaudit run --input research-audit/inputs/original-policy.java -o research-audit/results/policy-structure.json -- python -c 'import json,re; from pathlib import Path; print(json.dumps({"policy_decision_branches":Path("research-audit/inputs/original-policy.java").read_text().count("return new PolicyResult(")}))'
       - name: Extract historical results with new provenance
         run: |
           osaudit run --input research-audit/inputs/safe-ir-supplement.zip -o research-audit/results/historical.json -- python research-audit/extract_evidence.py research-audit/inputs/safe-ir-supplement.zip
@@ -44,14 +65,14 @@ jobs:
           if [ "$number_status" -eq 2 ]; then exit 2; fi
           exit "$status"
       - name: Preserve verified evidence in Git
-        if: success() && github.ref == 'refs/heads/research-osaudit'
+        if: success() && github.ref == 'refs/heads/research-evidence-docs'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f research-audit/inputs/safe-ir-supplement.zip research-audit/results/historical.json research-audit/number-findings.json research-audit/audit.log
+          git add -f research-audit/inputs/original research-audit/inputs/original-policy.java research-audit/results/ research-audit/number-findings.json research-audit/audit.log
           if ! git diff --cached --quiet; then
             git commit -m "Preserve verified historical audit evidence"
-            git push origin HEAD:research-osaudit
+            git push origin HEAD:research-evidence-docs
           fi
       - uses: actions/upload-artifact@v7.0.2
         if: always()

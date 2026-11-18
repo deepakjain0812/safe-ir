@@ -12,6 +12,12 @@ SAFE-IR separates a replaceable remediation proposer (deterministic rules or loc
 | **v0.2.0 live lab (Milestone 1)** | Three Dockerized Spring Boot services with real HTTP traffic and controlled faults | Externally measured HTTP failures, latency and post-reset recovery |
 | **v0.2.0 ECRA integration (Milestone 2, PR #5)** | Live HTTP observations, captured rules/Ollama proposals, baseline-versus-ECRA replay | Controlled lab-only fault reset and independently probed service behavior, **not** validated production safety or MTTR |
 
+## Research publication and open science
+
+The [published preprint (Zenodo DOI)](https://doi.org/10.5281/zenodo.24285121) describes v0.1.0, not the subsequent live lab. See the [paper PDF](SAFE-IR_Preprint.pdf), [archived evidence](https://doi.org/10.5281/zenodo.24206339), [claim ledger](PAPER-NUMBERS.csv), [evidence guide](CLAIMS-EVIDENCE.md), and [audit reproduction instructions](research-audit/README.md).
+
+The historical synthetic evaluation contains 180 runs across six scenarios and three modes, with ten repeats per cell. Ten JUnit tests passed; the archived smoke report records four passing HTTP checks. The author-side [official osaudit run](https://github.com/deepakjain0812/safe-ir/actions/runs/44133782380) succeeded with zero numerical findings. Independent endorsement review remains pending; this is not peer review or production validation.
+
 ## Architecture
 
 <img width="100%" alt="SAFE-IR v0.2.0 architecture: recovery controller, disposable Docker lab, and external Python verifier" src="https://github.com/user-attachments/assets/ce15818d-966c-4187-b7b0-d1d879acd7ea" />

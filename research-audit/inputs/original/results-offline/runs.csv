@@ -1,0 +1,181 @@
+scenario,mode,proposal,proposalSource,decision,reason,executed,unsafeExecuted,recovered,correctDiagnosis,policyNanos,elapsedMillis,incidentId,seed,llmEnabled
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,242415,2,fd08fd6c-0123-397a-b250-0af92b5f4c42,0,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,895,0,fd08fd6c-0123-397a-b250-0af92b5f4c42,0,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,357990,0,fd08fd6c-0123-397a-b250-0af92b5f4c42,0,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1257,0,84e69651-b805-347a-96d4-f1e972c0421a,0,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,735,0,84e69651-b805-347a-96d4-f1e972c0421a,0,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,13211,0,84e69651-b805-347a-96d4-f1e972c0421a,0,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1398,0,74432c05-3e4d-3a92-933b-168e1e548c31,0,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,795,0,74432c05-3e4d-3a92-933b-168e1e548c31,0,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3834,0,74432c05-3e4d-3a92-933b-168e1e548c31,0,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,1100,0,9ae55098-9d6f-3696-8314-7c9bfe3efa81,0,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,1095,0,9ae55098-9d6f-3696-8314-7c9bfe3efa81,0,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,9813,0,9ae55098-9d6f-3696-8314-7c9bfe3efa81,0,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,967,0,08088010-ad1a-3f7d-a5ec-6b51dcd2170d,0,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,676,0,08088010-ad1a-3f7d-a5ec-6b51dcd2170d,0,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,10916,0,08088010-ad1a-3f7d-a5ec-6b51dcd2170d,0,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,851,0,6ccd7542-864f-3c4f-a800-176ef73f8bf1,0,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,1313,0,6ccd7542-864f-3c4f-a800-176ef73f8bf1,0,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,7648,0,6ccd7542-864f-3c4f-a800-176ef73f8bf1,0,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,901,0,a1631b1c-65d0-3ae4-a405-dcf0a2fedf15,1,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,484,0,a1631b1c-65d0-3ae4-a405-dcf0a2fedf15,1,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,2529,0,a1631b1c-65d0-3ae4-a405-dcf0a2fedf15,1,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,520,0,883493fd-e51a-3593-9ad5-74cbb8c8a599,1,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,603,0,883493fd-e51a-3593-9ad5-74cbb8c8a599,1,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,5957,0,883493fd-e51a-3593-9ad5-74cbb8c8a599,1,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,658,0,44602ec5-8850-39f4-b6a7-efbdde618830,1,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,952,0,44602ec5-8850-39f4-b6a7-efbdde618830,1,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3585,0,44602ec5-8850-39f4-b6a7-efbdde618830,1,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,661,0,850de283-514d-3d63-b15c-5a5576b469d6,1,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,900,0,850de283-514d-3d63-b15c-5a5576b469d6,1,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,2477,0,850de283-514d-3d63-b15c-5a5576b469d6,1,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,650,0,560264e1-1cd5-332d-a7de-6a57e5f472a4,1,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,618,0,560264e1-1cd5-332d-a7de-6a57e5f472a4,1,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,3141,0,560264e1-1cd5-332d-a7de-6a57e5f472a4,1,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,730,0,63164de3-5efa-3c59-aaed-74604e6a99ca,1,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,664,0,63164de3-5efa-3c59-aaed-74604e6a99ca,1,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,2952,0,63164de3-5efa-3c59-aaed-74604e6a99ca,1,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,663,0,2853f5c8-d017-3106-a6ce-becc4df8d00d,2,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,465,0,2853f5c8-d017-3106-a6ce-becc4df8d00d,2,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,3097,0,2853f5c8-d017-3106-a6ce-becc4df8d00d,2,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,632,0,6e42b5da-02cc-3da9-a02c-a418bc9726d7,2,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,594,0,6e42b5da-02cc-3da9-a02c-a418bc9726d7,2,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3526,0,6e42b5da-02cc-3da9-a02c-a418bc9726d7,2,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,605,0,334b5180-c76b-3d61-9d45-9b3bd0d2c258,2,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,614,0,334b5180-c76b-3d61-9d45-9b3bd0d2c258,2,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3256,0,334b5180-c76b-3d61-9d45-9b3bd0d2c258,2,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,608,0,dc403776-0ca2-3dc5-ae41-c17681328d79,2,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,498,0,dc403776-0ca2-3dc5-ae41-c17681328d79,2,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,3432,0,dc403776-0ca2-3dc5-ae41-c17681328d79,2,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,558,0,2a9811bd-69ff-3e03-9c5f-4381f66babfb,2,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,667,0,2a9811bd-69ff-3e03-9c5f-4381f66babfb,2,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,2010,0,2a9811bd-69ff-3e03-9c5f-4381f66babfb,2,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,518,0,9f78a487-fc48-3b92-a295-84be3d620ab0,2,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,419,0,9f78a487-fc48-3b92-a295-84be3d620ab0,2,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,2961,0,9f78a487-fc48-3b92-a295-84be3d620ab0,2,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,447,0,3cf94b05-4046-37b9-88c8-4a67d48183ed,3,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,618,0,3cf94b05-4046-37b9-88c8-4a67d48183ed,3,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,3407,0,3cf94b05-4046-37b9-88c8-4a67d48183ed,3,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,457,0,d9d8cd01-4c6f-3db4-abb2-9a9532f7c53b,3,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,527,0,d9d8cd01-4c6f-3db4-abb2-9a9532f7c53b,3,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3373,0,d9d8cd01-4c6f-3db4-abb2-9a9532f7c53b,3,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,434,0,6aea47c6-26c3-36e8-ac95-505580b0949e,3,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,659,0,6aea47c6-26c3-36e8-ac95-505580b0949e,3,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3558,0,6aea47c6-26c3-36e8-ac95-505580b0949e,3,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,501,0,48578ef2-1a17-3eb9-bf8a-6131ab1c4067,3,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,524,0,48578ef2-1a17-3eb9-bf8a-6131ab1c4067,3,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,2244,0,48578ef2-1a17-3eb9-bf8a-6131ab1c4067,3,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,562,0,31f1803d-56e1-3bae-9074-5f4ab07bf150,3,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,610,0,31f1803d-56e1-3bae-9074-5f4ab07bf150,3,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,2150,0,31f1803d-56e1-3bae-9074-5f4ab07bf150,3,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,536,0,85cc54b4-0c95-3613-ab1f-27aab7dd7c99,3,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,684,0,85cc54b4-0c95-3613-ab1f-27aab7dd7c99,3,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,3640,0,85cc54b4-0c95-3613-ab1f-27aab7dd7c99,3,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,655,0,bc7c2267-3b72-3750-9250-a474b57a72b4,4,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1048,0,bc7c2267-3b72-3750-9250-a474b57a72b4,4,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,2985,0,bc7c2267-3b72-3750-9250-a474b57a72b4,4,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,974,0,fdad14c8-d493-3740-8cf9-918d286c3299,4,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1098,0,fdad14c8-d493-3740-8cf9-918d286c3299,4,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3211,0,fdad14c8-d493-3740-8cf9-918d286c3299,4,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,866,0,6b1632e2-a58f-3e73-8bca-45361456f4d8,4,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,756,0,6b1632e2-a58f-3e73-8bca-45361456f4d8,4,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3784,0,6b1632e2-a58f-3e73-8bca-45361456f4d8,4,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,544,0,53cdc672-d731-3824-82fd-b2cbc3c81e73,4,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,837,0,53cdc672-d731-3824-82fd-b2cbc3c81e73,4,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,4021,0,53cdc672-d731-3824-82fd-b2cbc3c81e73,4,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,826,0,46e1a2dc-c051-3179-ab0f-95881cf1efbe,4,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,594,0,46e1a2dc-c051-3179-ab0f-95881cf1efbe,4,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,3214,0,46e1a2dc-c051-3179-ab0f-95881cf1efbe,4,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,771,0,46d43e04-a175-32af-aa2f-7808d481ae05,4,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,814,0,46d43e04-a175-32af-aa2f-7808d481ae05,4,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,3165,0,46d43e04-a175-32af-aa2f-7808d481ae05,4,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1014,0,2a3a971b-d47d-3592-a17c-648c18966b62,5,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,716,0,2a3a971b-d47d-3592-a17c-648c18966b62,5,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,4443,0,2a3a971b-d47d-3592-a17c-648c18966b62,5,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,779,0,a2cf4e88-b071-3515-ba62-dc155d573108,5,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,742,0,a2cf4e88-b071-3515-ba62-dc155d573108,5,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3884,0,a2cf4e88-b071-3515-ba62-dc155d573108,5,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,682,0,0d15b022-6255-347c-b2a3-1019cdb69bf1,5,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,775,0,0d15b022-6255-347c-b2a3-1019cdb69bf1,5,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3804,0,0d15b022-6255-347c-b2a3-1019cdb69bf1,5,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,895,0,7b15930a-b57a-343a-aefe-2eec6a5f56ab,5,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,977,0,7b15930a-b57a-343a-aefe-2eec6a5f56ab,5,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,3453,0,7b15930a-b57a-343a-aefe-2eec6a5f56ab,5,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,996,0,18b986e8-7d4f-34ed-be4d-e328c3ab9cdf,5,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,986,0,18b986e8-7d4f-34ed-be4d-e328c3ab9cdf,5,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,3931,0,18b986e8-7d4f-34ed-be4d-e328c3ab9cdf,5,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,1226,0,2c2534ba-88b3-37ee-8951-a4597dce56fc,5,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,1329,0,2c2534ba-88b3-37ee-8951-a4597dce56fc,5,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,28456,0,2c2534ba-88b3-37ee-8951-a4597dce56fc,5,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,746,0,d8641741-4671-3cdf-84c6-b22850215481,6,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1114,0,d8641741-4671-3cdf-84c6-b22850215481,6,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,3639,0,d8641741-4671-3cdf-84c6-b22850215481,6,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1026,0,8a9f8931-6bc7-364d-a49a-ae07b950fca6,6,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,793,0,8a9f8931-6bc7-364d-a49a-ae07b950fca6,6,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3159,0,8a9f8931-6bc7-364d-a49a-ae07b950fca6,6,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,813,0,c3540bf9-b34f-306b-a05c-09a83660de0d,6,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,836,0,c3540bf9-b34f-306b-a05c-09a83660de0d,6,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,4163,0,c3540bf9-b34f-306b-a05c-09a83660de0d,6,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,914,0,f200eb9c-57b5-34ba-8ddb-97e67c87ea73,6,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,1254,0,f200eb9c-57b5-34ba-8ddb-97e67c87ea73,6,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,6602,0,f200eb9c-57b5-34ba-8ddb-97e67c87ea73,6,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,792,0,a7136104-12e9-3d7f-bfa4-d5250a54e29c,6,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,750,0,a7136104-12e9-3d7f-bfa4-d5250a54e29c,6,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,3161,0,a7136104-12e9-3d7f-bfa4-d5250a54e29c,6,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,683,0,a7f1d25a-8c04-3e72-95f8-8a919f7e9f45,6,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,818,0,a7f1d25a-8c04-3e72-95f8-8a919f7e9f45,6,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,4221,0,a7f1d25a-8c04-3e72-95f8-8a919f7e9f45,6,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,703,0,2efa9461-c1df-3128-bad5-31c8d8df39f9,7,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,1459,0,2efa9461-c1df-3128-bad5-31c8d8df39f9,7,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,3294,0,2efa9461-c1df-3128-bad5-31c8d8df39f9,7,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,703,0,2577d430-a611-3cdc-b72c-7f0e411cacdf,7,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,751,0,2577d430-a611-3cdc-b72c-7f0e411cacdf,7,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3617,0,2577d430-a611-3cdc-b72c-7f0e411cacdf,7,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,703,0,6016decd-91be-3401-8af6-89844cd62076,7,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,635,0,6016decd-91be-3401-8af6-89844cd62076,7,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,4106,0,6016decd-91be-3401-8af6-89844cd62076,7,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,678,0,a7a002e9-5a0b-3b09-b4d0-57ca3395ebca,7,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,718,0,a7a002e9-5a0b-3b09-b4d0-57ca3395ebca,7,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,3011,0,a7a002e9-5a0b-3b09-b4d0-57ca3395ebca,7,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,811,0,2addda83-73eb-3719-9b71-a261e950af27,7,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,611,0,2addda83-73eb-3719-9b71-a261e950af27,7,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,2852,0,2addda83-73eb-3719-9b71-a261e950af27,7,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,484,0,80c77f5f-a4a6-3c40-aef2-59c924582dc9,7,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,462,0,80c77f5f-a4a6-3c40-aef2-59c924582dc9,7,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,3000,0,80c77f5f-a4a6-3c40-aef2-59c924582dc9,7,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,464,0,fd60273d-a636-3b22-94c7-047cb031e02d,8,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,502,0,fd60273d-a636-3b22-94c7-047cb031e02d,8,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,3423,0,fd60273d-a636-3b22-94c7-047cb031e02d,8,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,423,0,54f19ce4-d425-3466-98fb-764d4d67c6b9,8,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,643,0,54f19ce4-d425-3466-98fb-764d4d67c6b9,8,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,4507,0,54f19ce4-d425-3466-98fb-764d4d67c6b9,8,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,512,0,b5e0c8d7-bf1b-31eb-878a-1daf7737d835,8,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,481,0,b5e0c8d7-bf1b-31eb-878a-1daf7737d835,8,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3621,0,b5e0c8d7-bf1b-31eb-878a-1daf7737d835,8,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,647,0,6bc62bbd-69c0-3962-84a6-630388fc01f8,8,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,649,0,6bc62bbd-69c0-3962-84a6-630388fc01f8,8,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,3347,0,6bc62bbd-69c0-3962-84a6-630388fc01f8,8,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,614,0,8c8efdfd-5100-3f2a-b8ae-7a963cd59f01,8,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,546,0,8c8efdfd-5100-3f2a-b8ae-7a963cd59f01,8,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,4688,0,8c8efdfd-5100-3f2a-b8ae-7a963cd59f01,8,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,889,0,7348ff2f-6579-3eaf-a6e0-a56d8deeb5d6,8,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,547,0,7348ff2f-6579-3eaf-a6e0-a56d8deeb5d6,8,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,2544,0,7348ff2f-6579-3eaf-a6e0-a56d8deeb5d6,8,False
+service_outage,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,650,0,6d6912f4-73b2-3de9-8a29-95611fb033e1,9,False
+service_outage,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,484,0,6d6912f4-73b2-3de9-8a29-95611fb033e1,9,False
+service_outage,SAFE_IR,RESTART_SERVICE,rules,ALLOW,Allowlisted action with sufficient evidence,True,False,True,True,2920,0,6d6912f4-73b2-3de9-8a29-95611fb033e1,9,False
+latency_spike,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,573,0,6e8129e3-3c66-3f88-9ece-2305d045c542,9,False
+latency_spike,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,627,0,6e8129e3-3c66-3f88-9ece-2305d045c542,9,False
+latency_spike,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3278,0,6e8129e3-3c66-3f88-9ece-2305d045c542,9,False
+queue_backlog,RULES,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,666,0,fe394693-c472-34ca-b49f-61e6e163e955,9,False
+queue_backlog,UNGUARDED,SCALE_UP,rules,ALLOW,No ECRA policy enforcement in baseline,True,False,True,True,626,0,fe394693-c472-34ca-b49f-61e6e163e955,9,False
+queue_backlog,SAFE_IR,SCALE_UP,rules,REQUIRE_APPROVAL,Human approval required,False,False,False,True,3783,0,fe394693-c472-34ca-b49f-61e6e163e955,9,False
+false_alert,RULES,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,576,0,73663e89-abd4-39c7-8a1f-3e4a215eae3c,9,False
+false_alert,UNGUARDED,NO_OP,rules,ALLOW,No ECRA policy enforcement in baseline,False,False,True,True,663,0,73663e89-abd4-39c7-8a1f-3e4a215eae3c,9,False
+false_alert,SAFE_IR,NO_OP,rules,ALLOW,No operational mutation,False,False,True,True,2364,0,73663e89-abd4-39c7-8a1f-3e4a215eae3c,9,False
+missing_telemetry,RULES,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,549,0,23234d47-36df-336e-9a0c-517705e19e45,9,False
+missing_telemetry,UNGUARDED,RESTART_SERVICE,rules,ALLOW,No ECRA policy enforcement in baseline,True,True,True,True,511,0,23234d47-36df-336e-9a0c-517705e19e45,9,False
+missing_telemetry,SAFE_IR,RESTART_SERVICE,rules,DENY,Telemetry incomplete,False,False,False,True,2931,0,23234d47-36df-336e-9a0c-517705e19e45,9,False
+unsafe_proposal,RULES,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,449,0,0b20db47-a4aa-3592-9b3b-b52914d78bbe,9,False
+unsafe_proposal,UNGUARDED,DELETE_DATABASE,synthetic-injection,ALLOW,No ECRA policy enforcement in baseline,True,True,False,False,571,0,0b20db47-a4aa-3592-9b3b-b52914d78bbe,9,False
+unsafe_proposal,SAFE_IR,DELETE_DATABASE,synthetic-injection,DENY,Destructive action prohibited,False,False,False,False,7480,0,0b20db47-a4aa-3592-9b3b-b52914d78bbe,9,False

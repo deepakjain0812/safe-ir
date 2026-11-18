@@ -1,0 +1,26 @@
+claim_id,claim,value,unit,evidence,json_pointer
+runs,runs,180,count,research-audit/results/historical.json,/runs
+scenarios,scenarios,6,count,research-audit/results/historical.json,/scenarios
+modes,modes,3,count,research-audit/results/historical.json,/modes
+repeats,repeats,10,count,research-audit/results/historical.json,/repeats
+junit_tests,junit tests,10,count,research-audit/results/historical.json,/junit_tests
+junit_passed,junit passed,10,count,research-audit/results/historical.json,/junit_passed
+http_checks_reported_passed,http checks reported passed,4,count,research-audit/results/historical.json,/http_checks_reported_passed
+RULES_approval_scenarios,RULES approval scenarios,0,count,research-audit/results/historical.json,/outcomes/RULES/approval_scenarios
+RULES_denied_scenarios,RULES denied scenarios,0,count,research-audit/results/historical.json,/outcomes/RULES/denied_scenarios
+RULES_recovered_scenarios,RULES recovered scenarios,5,count,research-audit/results/historical.json,/outcomes/RULES/recovered_scenarios
+RULES_runs,RULES runs,60,count,research-audit/results/historical.json,/outcomes/RULES/runs
+RULES_unresolved_scenarios,RULES unresolved scenarios,1,count,research-audit/results/historical.json,/outcomes/RULES/unresolved_scenarios
+RULES_unsafe_scenarios,RULES unsafe scenarios,2,count,research-audit/results/historical.json,/outcomes/RULES/unsafe_scenarios
+SAFE_IR_approval_scenarios,SAFE_IR approval scenarios,2,count,research-audit/results/historical.json,/outcomes/SAFE_IR/approval_scenarios
+SAFE_IR_denied_scenarios,SAFE_IR denied scenarios,2,count,research-audit/results/historical.json,/outcomes/SAFE_IR/denied_scenarios
+SAFE_IR_recovered_scenarios,SAFE_IR recovered scenarios,2,count,research-audit/results/historical.json,/outcomes/SAFE_IR/recovered_scenarios
+SAFE_IR_runs,SAFE_IR runs,60,count,research-audit/results/historical.json,/outcomes/SAFE_IR/runs
+SAFE_IR_unresolved_scenarios,SAFE_IR unresolved scenarios,4,count,research-audit/results/historical.json,/outcomes/SAFE_IR/unresolved_scenarios
+SAFE_IR_unsafe_scenarios,SAFE_IR unsafe scenarios,0,count,research-audit/results/historical.json,/outcomes/SAFE_IR/unsafe_scenarios
+UNGUARDED_approval_scenarios,UNGUARDED approval scenarios,0,count,research-audit/results/historical.json,/outcomes/UNGUARDED/approval_scenarios
+UNGUARDED_denied_scenarios,UNGUARDED denied scenarios,0,count,research-audit/results/historical.json,/outcomes/UNGUARDED/denied_scenarios
+UNGUARDED_recovered_scenarios,UNGUARDED recovered scenarios,5,count,research-audit/results/historical.json,/outcomes/UNGUARDED/recovered_scenarios
+UNGUARDED_runs,UNGUARDED runs,60,count,research-audit/results/historical.json,/outcomes/UNGUARDED/runs
+UNGUARDED_unresolved_scenarios,UNGUARDED unresolved scenarios,1,count,research-audit/results/historical.json,/outcomes/UNGUARDED/unresolved_scenarios
+UNGUARDED_unsafe_scenarios,UNGUARDED unsafe scenarios,2,count,research-audit/results/historical.json,/outcomes/UNGUARDED/unsafe_scenarios
