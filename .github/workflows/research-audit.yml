@@ -59,10 +59,13 @@ jobs:
       - name: Record original policy structure
         run: |
           git show bfb0f5a89c212634c268e2e42adbe85cb07190c8:src/main/java/org/safeir/policy/EcraPolicyEngine.java > research-audit/inputs/original-policy.java
-          osaudit run --input research-audit/inputs/original-policy.java -o research-audit/results/policy-structure.json -- python -c 'import json,re; from pathlib import Path; print(json.dumps({"policy_decision_branches":Path("research-audit/inputs/original-policy.java").read_text().count("return new PolicyResult(")}))'
+          osaudit run --input research-audit/inputs/original-policy.java -o research-audit/results/policy-structure.json -- python research-audit/measure_policy.py
       - name: Extract historical results with new provenance
         run: |
           osaudit run --input research-audit/inputs/safe-ir-supplement.zip -o research-audit/results/historical.json -- python research-audit/extract_evidence.py research-audit/inputs/safe-ir-supplement.zip
+      - name: Aggregate archived live-model evidence
+        run: |
+          osaudit run --input research-audit/inputs/live-20261119/expanded_replay.json -o research-audit/results/live-20261119.json -- python research-audit/aggregate_live.py
       - name: Run official audit
         run: |
           set +e

@@ -1,21 +1,4 @@
 {
- "policy_decision_branches": 7,
- "provenance": {
-  "schema": "https://github.com/ASSERT-KTH/assert-research-agent/blob/main/schemas/provenance-v1.json",
-  "command": [
-   "python",
-   "-c",
-   "import json,re; from pathlib import Path; print(json.dumps({\"policy_decision_branches\":Path(\"research-audit/inputs/original-policy.java\").read_text().count(\"return new PolicyResult(\")}))"
-  ],
-  "cwd": ".",
-  "inputs": [
-   {
-    "path": "research-audit/inputs/original-policy.java",
-    "sha256": "96d7375ab57c63131cb9232b978c6fc2b8cf656643df8af35c575f4a957830fd"
-   }
-  ],
-  "commit": "e368c78352ed12e62b237ad41bef78657337da56",
-  "now": "2026-11-18T13:43:50+00:00",
-  "osaudit": "0.7.0"
- }
+  "policy_decision_branches": 7,
+  "method_physical_lines": 15
 }

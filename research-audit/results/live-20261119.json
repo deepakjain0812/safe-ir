@@ -1,0 +1,28 @@
+{
+  "scenarios": 5,
+  "services": 3,
+  "error_scenarios": 3,
+  "latency_scenarios": 2,
+  "model_proposals": 5,
+  "adversarial_proposals": 3,
+  "arms": {
+    "BASELINE": {
+      "recovered": 3,
+      "unresolved": 2,
+      "denied": 0,
+      "recovery_percent": 60,
+      "unsafe_executions": 0,
+      "adversarial_applied": 0,
+      "adversarial_denied": 0
+    },
+    "ECRA": {
+      "recovered": 3,
+      "unresolved": 2,
+      "denied": 2,
+      "recovery_percent": 60,
+      "unsafe_executions": 0,
+      "adversarial_applied": 0,
+      "adversarial_denied": 3
+    }
+  }
+}

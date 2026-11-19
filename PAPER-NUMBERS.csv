@@ -24,3 +24,24 @@ UNGUARDED_recovered_scenarios,UNGUARDED recovered scenarios,5,count,research-aud
 UNGUARDED_runs,UNGUARDED runs,60,count,research-audit/results/historical.json,/outcomes/UNGUARDED/runs
 UNGUARDED_unresolved_scenarios,UNGUARDED unresolved scenarios,1,count,research-audit/results/historical.json,/outcomes/UNGUARDED/unresolved_scenarios
 UNGUARDED_unsafe_scenarios,UNGUARDED unsafe scenarios,2,count,research-audit/results/historical.json,/outcomes/UNGUARDED/unsafe_scenarios
+live_scenarios,live scenarios,5,count,research-audit/results/live-20261119.json,/scenarios
+live_services,live services,3,count,research-audit/results/live-20261119.json,/services
+live_error_scenarios,live error scenarios,3,count,research-audit/results/live-20261119.json,/error_scenarios
+live_latency_scenarios,live latency scenarios,2,count,research-audit/results/live-20261119.json,/latency_scenarios
+live_model_proposals,live model proposals,5,count,research-audit/results/live-20261119.json,/model_proposals
+live_adversarial_proposals,live adversarial proposals,3,count,research-audit/results/live-20261119.json,/adversarial_proposals
+live_BASELINE_recovered,live BASELINE recovered,3,count,research-audit/results/live-20261119.json,/arms/BASELINE/recovered
+live_BASELINE_unresolved,live BASELINE unresolved,2,count,research-audit/results/live-20261119.json,/arms/BASELINE/unresolved
+live_BASELINE_denied,live BASELINE denied,0,count,research-audit/results/live-20261119.json,/arms/BASELINE/denied
+live_BASELINE_recovery_percent,live BASELINE recovery percent,60,percent,research-audit/results/live-20261119.json,/arms/BASELINE/recovery_percent
+live_BASELINE_unsafe_executions,live BASELINE unsafe executions,0,count,research-audit/results/live-20261119.json,/arms/BASELINE/unsafe_executions
+live_BASELINE_adversarial_applied,live BASELINE adversarial applied,0,count,research-audit/results/live-20261119.json,/arms/BASELINE/adversarial_applied
+live_BASELINE_adversarial_denied,live BASELINE adversarial denied,0,count,research-audit/results/live-20261119.json,/arms/BASELINE/adversarial_denied
+live_ECRA_recovered,live ECRA recovered,3,count,research-audit/results/live-20261119.json,/arms/ECRA/recovered
+live_ECRA_unresolved,live ECRA unresolved,2,count,research-audit/results/live-20261119.json,/arms/ECRA/unresolved
+live_ECRA_denied,live ECRA denied,2,count,research-audit/results/live-20261119.json,/arms/ECRA/denied
+live_ECRA_recovery_percent,live ECRA recovery percent,60,percent,research-audit/results/live-20261119.json,/arms/ECRA/recovery_percent
+live_ECRA_unsafe_executions,live ECRA unsafe executions,0,count,research-audit/results/live-20261119.json,/arms/ECRA/unsafe_executions
+live_ECRA_adversarial_applied,live ECRA adversarial applied,0,count,research-audit/results/live-20261119.json,/arms/ECRA/adversarial_applied
+live_ECRA_adversarial_denied,live ECRA adversarial denied,3,count,research-audit/results/live-20261119.json,/arms/ECRA/adversarial_denied
+ECRA_method_physical_lines,original ECRA evaluate physical lines including declaration and closing brace,15,lines,research-audit/results/policy-structure.json,/method_physical_lines

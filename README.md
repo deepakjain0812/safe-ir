@@ -14,7 +14,7 @@ SAFE-IR separates a replaceable remediation proposer (deterministic rules or loc
 
 ## Research publication and open science
 
-The [published preprint (Zenodo DOI)](https://doi.org/10.5281/zenodo.24285121) describes v0.1.0, not the subsequent live lab. See the [paper PDF](SAFE-IR_Preprint.pdf), [archived evidence](https://doi.org/10.5281/zenodo.24206339), [claim ledger](PAPER-NUMBERS.csv), [evidence guide](CLAIMS-EVIDENCE.md), and [audit reproduction instructions](research-audit/README.md).
+The [published preprint (Zenodo DOI)](https://doi.org/10.5281/zenodo.24285121) now describes the original v0.1.0 synthetic study and the preliminary v0.2.0 live-model evaluation (see revised Zenodo manuscript; local PDF mirror requires synchronization). See the [paper PDF](SAFE-IR_Preprint.pdf), [archived evidence](https://doi.org/10.5281/zenodo.24206339), [claim ledger](PAPER-NUMBERS.csv), [evidence guide](CLAIMS-EVIDENCE.md), and [audit reproduction instructions](research-audit/README.md).
 
 The historical synthetic evaluation contains 180 runs across six scenarios and three modes, with ten repeats per cell. Ten JUnit tests passed; the archived smoke report records four passing HTTP checks. The author-side [official osaudit run](https://github.com/deepakjain0812/safe-ir/actions/runs/44316608516) succeeded with zero numerical findings. The [November 19 automated review](https://github.com/monperrus/arxiv-endorsement/pull/66#issuecomment-7001362328) passed Gates 1, 2, 4 and 5; Gate 3 remains unresolved. This is neither endorsement nor peer review or production validation.
 
@@ -154,9 +154,11 @@ For a matched comparison, use the supplied `expanded_replay.py` runner. It reset
 
 ### Real Ollama inference
 
-The dedicated **[real-model CI workflow](.github/workflows/real-ollama.yml)** runs an actual `llama3.2:1b` proposal through the same live controller and stores model identity and result artifacts. A larger five-scenario Ollama run can be requested through the [live-lab workflow](.github/workflows/live-lab.yml) with the `run_ollama` manual input enabled.
+The dedicated **[real-model CI workflow](.github/workflows/real-ollama.yml)** runs actual `llama3.2:1b` inference, the single-case smoke test and a five-scenario matched replay through the live controller.
 
-In the first successful model-backed smoke run on November 16, 2026, Ollama proposed `SCALE_UP` for an injected Payments HTTP failure. ECRA denied the proposal; the baseline policy allowed it but the shared restricted executor refused the unsupported operation. **Neither arm recovered the service.** This is one observed trial—not a safety or performance advantage.
+In the first successful model-backed smoke run on November 16, 2026, Ollama proposed `SCALE_UP` for an injected Payments HTTP failure. ECRA denied the proposal; the baseline policy allowed it but the shared restricted executor refused the unsupported operation. **Neither arm recovered the service.** This earlier smoke result is separate from the manuscript's subsequent five-scenario evaluation.
+
+**November 19 expanded evaluation ([CI run](https://github.com/deepakjain0812/safe-ir/actions/runs/44547912097)):** Both arms recovered three of five scenarios (60%) after controlled fault resets. ECRA denied two latency-case restart proposals, and neither arm recovered those cases. The shared executor refused all three adversarial actions in both arms; no reduction in unsafe execution was observed. See [per-scenario evidence](research-audit/inputs/live-20261119/expanded_replay.json), [aggregate results](research-audit/results/live-20261119.json), [method and limitations](research-audit/LIVE-MODEL-REVIEW.md), and [claim ledger](PAPER-NUMBERS.csv). The original ECRA evaluate method has 15 physical lines including its declaration and closing brace, reproducibly measured by `python3 research-audit/measure_policy.py`.
 
 See [Milestone 1 lab guide](lab/README.md), [Milestone 2 protocol and limitations](lab/MILESTONE2.md), and the [live replay CI](.github/workflows/live-policy.yml).
 
@@ -247,7 +249,7 @@ Modes: `RULES` (rules without ECRA), `UNGUARDED` (agent without ECRA), and `SAFE
 
 1. **Implemented as lab plumbing:** containerized microservices and fault injection; additional independent fault classes are still needed.
 2. **Partially implemented:** real HTTP status and latency probes and recovery after controlled fault resets; OpenTelemetry and actual production-like remediation are not implemented.
-3. **Partially implemented:** matched proposal capture/replay on a fixed lab scenario; randomized and replicated comparisons are not implemented.
+3. **Partially implemented:** matched proposal capture/replay on five fixed lab scenarios; randomized and replicated comparisons are not implemented.
 4. **Partially implemented:** external HTTP recovery verifier and lab-only human approval; durable approval audit, rollback and true process-level recovery remain unimplemented.
 5. Variability across independent workloads and documented uncertainty.
 6. Verifiable citations, a stronger literature review, and publication permission checks.
@@ -269,7 +271,7 @@ experiments/   v0.1.0 synthetic Python HTTP checks and CSV/JSON runner
 lab/           Java 21 live-service image, tests, workload and Python live verification
 docker-compose.lab.yml  Isolated multi-service lab, controller, optional Ollama
 .github/workflows/live-policy.yml  Matched rule-based replay and safety rubric CI
-.github/workflows/real-ollama.yml Real Ollama model-backed smoke CI
+.github/workflows/real-ollama.yml Real Ollama smoke and five-scenario replay CI
 ```
 
 **Publication:** Verify employer intellectual-property and external-publication requirements before treating this repository as a citable research artifact.
