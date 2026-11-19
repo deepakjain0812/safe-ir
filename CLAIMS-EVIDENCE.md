@@ -15,3 +15,7 @@ Scope: original v0.1.0 synthetic preprint only. The later live lab is not eviden
 The ledger covers the verified historical result fields; it is not a certified exhaustive transcription of every printed paper number. See the audit configuration for non-outcome numerical values.
 
 [Original evidence archive](research-audit/inputs/safe-ir-supplement.zip) · [Audit reproduction](research-audit/README.md)
+
+## Scenario-level interpretation
+
+The two baseline modes report the same synthetic outcomes. Three of the five baseline-labelled recoveries are lost with ECRA: latency_spike and queue_backlog are held for approval, and missing_telemetry is denied (its baseline recovery was also unsafe). The unsafe_proposal case is unresolved in both arms. false_alert is a successful no-op rather than service restoration. See the [original CSV](research-audit/inputs/original/results-offline/runs.csv) and [README scenario table](README.md#interpretation-of-the-original-scenario-outcomes).

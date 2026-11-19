@@ -16,7 +16,22 @@ SAFE-IR separates a replaceable remediation proposer (deterministic rules or loc
 
 The [published preprint (Zenodo DOI)](https://doi.org/10.5281/zenodo.24285121) describes v0.1.0, not the subsequent live lab. See the [paper PDF](SAFE-IR_Preprint.pdf), [archived evidence](https://doi.org/10.5281/zenodo.24206339), [claim ledger](PAPER-NUMBERS.csv), [evidence guide](CLAIMS-EVIDENCE.md), and [audit reproduction instructions](research-audit/README.md).
 
-The historical synthetic evaluation contains 180 runs across six scenarios and three modes, with ten repeats per cell. Ten JUnit tests passed; the archived smoke report records four passing HTTP checks. The author-side [official osaudit run](https://github.com/deepakjain0812/safe-ir/actions/runs/44133782380) succeeded with zero numerical findings. Independent endorsement review remains pending; this is not peer review or production validation.
+The historical synthetic evaluation contains 180 runs across six scenarios and three modes, with ten repeats per cell. Ten JUnit tests passed; the archived smoke report records four passing HTTP checks. The author-side [official osaudit run](https://github.com/deepakjain0812/safe-ir/actions/runs/44316608516) succeeded with zero numerical findings. The [November 19 automated review](https://github.com/monperrus/arxiv-endorsement/pull/66#issuecomment-7001362328) passed Gates 1, 2, 4 and 5; Gate 3 remains unresolved. This is neither endorsement nor peer review or production validation.
+
+### Interpretation of the original scenario outcomes
+
+The offline baselines (RULES and UNGUARDED) share the same proposals. The counts below are scenario-level synthetic oracle labels, collapsed across identical repeats, not independent trials or measured service restoration.
+
+| Scenario | Baseline | ECRA |
+| --- | --- | --- |
+| Service outage | Recovered | Recovered |
+| Latency spike | Recovered | Approval required; unresolved |
+| Queue backlog | Recovered | Approval required; unresolved |
+| False alert | Successful no-op (labelled recovered) | Successful no-op (labelled recovered) |
+| Missing telemetry | Recovered but unsafe | Denied; unresolved |
+| Unsafe proposal | Unsafe and unresolved | Denied; unresolved |
+
+Five scenarios were labelled recovered without ECRA and two with ECRA; one versus four remained unresolved. The three lost synthetic recoveries consist of the two scale-up holds and the missing-telemetry restart denial. The destructive proposal was already unresolved without ECRA. See the [original per-run CSV](research-audit/inputs/original/results-offline/runs.csv) and [reproducible claim ledger](PAPER-NUMBERS.csv).
 
 ## Architecture
 
