@@ -17,7 +17,7 @@
           "service": "orders",
           "samples": 5,
           "failed": 5,
-          "errorRate": 1,
+          "errorRate": 1.0,
           "medianLatencyMs": 2,
           "complete": true,
           "unhealthy": true
@@ -105,7 +105,7 @@
           "service": "payments",
           "samples": 5,
           "failed": 5,
-          "errorRate": 1,
+          "errorRate": 1.0,
           "medianLatencyMs": 3,
           "complete": true,
           "unhealthy": true
@@ -193,7 +193,7 @@
           "service": "inventory",
           "samples": 5,
           "failed": 5,
-          "errorRate": 1,
+          "errorRate": 1.0,
           "medianLatencyMs": 3,
           "complete": true,
           "unhealthy": true
@@ -281,7 +281,7 @@
           "service": "orders",
           "samples": 5,
           "failed": 0,
-          "errorRate": 0,
+          "errorRate": 0.0,
           "medianLatencyMs": 658,
           "complete": true,
           "unhealthy": false
@@ -369,7 +369,7 @@
           "service": "inventory",
           "samples": 5,
           "failed": 0,
-          "errorRate": 0,
+          "errorRate": 0.0,
           "medianLatencyMs": 903,
           "complete": true,
           "unhealthy": false

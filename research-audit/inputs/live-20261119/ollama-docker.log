@@ -1,0 +1,312 @@
+recovery-controller-1  | 
+recovery-controller-1  |   .   ____          _            __ _ _
+recovery-controller-1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+recovery-controller-1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+recovery-controller-1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+recovery-controller-1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+payments-1             | 
+payments-1             |   .   ____          _            __ _ _
+payments-1             |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+payments-1             | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+payments-1             |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+payments-1             |   '  |____| .__|_| |_|_| |_\__, | / / / /
+payments-1             |  =========|_|==============|___/=/_/_/_/
+orders-1               | 
+recovery-controller-1  |  =========|_|==============|___/=/_/_/_/
+recovery-controller-1  | 
+recovery-controller-1  |  :: Spring Boot ::                (v3.4.5)
+recovery-controller-1  | 
+recovery-controller-1  | 2026-11-19T14:50:33.148Z  INFO 1 --- [safe-ir] [           main] org.safeir.SafeIrApplication             : Starting SafeIrApplication v0.1.0-SNAPSHOT using Java 21.0.13 with PID 1 (/app/app.jar started by ? in /app)
+recovery-controller-1  | 2026-11-19T14:50:33.171Z  INFO 1 --- [safe-ir] [           main] org.safeir.SafeIrApplication             : No active profile set, falling back to 1 default profile: "default"
+recovery-controller-1  | 2026-11-19T14:50:39.176Z  INFO 1 --- [safe-ir] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+recovery-controller-1  | 2026-11-19T14:50:39.227Z  INFO 1 --- [safe-ir] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+recovery-controller-1  | 2026-11-19T14:50:39.228Z  INFO 1 --- [safe-ir] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+recovery-controller-1  | 2026-11-19T14:50:39.363Z  INFO 1 --- [safe-ir] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+recovery-controller-1  | 2026-11-19T14:50:39.368Z  INFO 1 --- [safe-ir] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5912 ms
+recovery-controller-1  | 2026-11-19T14:50:42.524Z  INFO 1 --- [safe-ir] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+recovery-controller-1  | 2026-11-19T14:50:42.646Z  INFO 1 --- [safe-ir] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+recovery-controller-1  | 2026-11-19T14:50:42.677Z  INFO 1 --- [safe-ir] [           main] org.safeir.SafeIrApplication             : Started SafeIrApplication in 13.004 seconds (process running for 15.279)
+recovery-controller-1  | 2026-11-19T14:50:43.046Z  INFO 1 --- [safe-ir] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+recovery-controller-1  | 2026-11-19T14:50:43.047Z  INFO 1 --- [safe-ir] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+payments-1             | 
+payments-1             |  :: Spring Boot ::                (v3.4.5)
+payments-1             | 
+payments-1             | 2026-11-19T14:50:32.791Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : Starting LiveLabApplication v0.2.0-SNAPSHOT using Java 21.0.13 with PID 1 (/app/app.jar started by labuser in /app)
+payments-1             | 2026-11-19T14:50:32.814Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : No active profile set, falling back to 1 default profile: "default"
+payments-1             | 2026-11-19T14:50:38.403Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+payments-1             | 2026-11-19T14:50:38.482Z  INFO 1 --- [safeir-live-lab] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+payments-1             | 2026-11-19T14:50:38.484Z  INFO 1 --- [safeir-live-lab] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+payments-1             | 2026-11-19T14:50:38.594Z  INFO 1 --- [safeir-live-lab] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+payments-1             | 2026-11-19T14:50:38.601Z  INFO 1 --- [safeir-live-lab] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5377 ms
+payments-1             | 2026-11-19T14:50:41.420Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+payments-1             | 2026-11-19T14:50:41.591Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+payments-1             | 2026-11-19T14:50:41.653Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : Started LiveLabApplication in 12.659 seconds (process running for 14.932)
+payments-1             | 2026-11-19T14:50:42.494Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+payments-1             | 2026-11-19T14:50:42.494Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+payments-1             | 2026-11-19T14:50:42.496Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+inventory-1            | 
+recovery-controller-1  | 2026-11-19T14:50:43.048Z  INFO 1 --- [safe-ir] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+inventory-1            |   .   ____          _            __ _ _
+orders-1               |   .   ____          _            __ _ _
+inventory-1            |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+orders-1               |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+orders-1               | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+orders-1               |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+orders-1               |   '  |____| .__|_| |_|_| |_\__, | / / / /
+orders-1               |  =========|_|==============|___/=/_/_/_/
+orders-1               | 
+orders-1               |  :: Spring Boot ::                (v3.4.5)
+orders-1               | 
+orders-1               | 2026-11-19T14:50:33.140Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : Starting LiveLabApplication v0.2.0-SNAPSHOT using Java 21.0.13 with PID 1 (/app/app.jar started by labuser in /app)
+orders-1               | 2026-11-19T14:50:33.161Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : No active profile set, falling back to 1 default profile: "default"
+orders-1               | 2026-11-19T14:50:38.324Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+orders-1               | 2026-11-19T14:50:38.375Z  INFO 1 --- [safeir-live-lab] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+orders-1               | 2026-11-19T14:50:38.377Z  INFO 1 --- [safeir-live-lab] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+orders-1               | 2026-11-19T14:50:38.436Z  INFO 1 --- [safeir-live-lab] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+orders-1               | 2026-11-19T14:50:38.442Z  INFO 1 --- [safeir-live-lab] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4955 ms
+orders-1               | 2026-11-19T14:50:41.371Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+orders-1               | 2026-11-19T14:50:41.618Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+orders-1               | 2026-11-19T14:50:41.694Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : Started LiveLabApplication in 12.043 seconds (process running for 14.678)
+orders-1               | 2026-11-19T14:50:41.963Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+orders-1               | 2026-11-19T14:50:41.969Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+orders-1               | 2026-11-19T14:50:41.970Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+inventory-1            | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+inventory-1            |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+inventory-1            |   '  |____| .__|_| |_|_| |_\__, | / / / /
+inventory-1            |  =========|_|==============|___/=/_/_/_/
+inventory-1            | 
+inventory-1            |  :: Spring Boot ::                (v3.4.5)
+inventory-1            | 
+inventory-1            | 2026-11-19T14:50:31.441Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : Starting LiveLabApplication v0.2.0-SNAPSHOT using Java 21.0.13 with PID 1 (/app/app.jar started by labuser in /app)
+inventory-1            | 2026-11-19T14:50:31.468Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : No active profile set, falling back to 1 default profile: "default"
+inventory-1            | 2026-11-19T14:50:37.116Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+inventory-1            | 2026-11-19T14:50:37.159Z  INFO 1 --- [safeir-live-lab] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+inventory-1            | 2026-11-19T14:50:37.160Z  INFO 1 --- [safeir-live-lab] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+inventory-1            | 2026-11-19T14:50:37.261Z  INFO 1 --- [safeir-live-lab] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+inventory-1            | 2026-11-19T14:50:37.269Z  INFO 1 --- [safeir-live-lab] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5387 ms
+inventory-1            | 2026-11-19T14:50:39.966Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+ollama-1               | Couldn't find '/root/.ollama/id_ed25519'. Generating new private key.
+ollama-1               | Your new public key is: 
+ollama-1               | 
+ollama-1               | ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpGLbQH/XLyw5j3wwoTxsVzRse+NRwdjBwSy17kG6+/
+ollama-1               | 
+ollama-1               | time=2026-11-19T14:50:26.483Z level=INFO source=routes.go:1525 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: NO_PROXY: OLLAMA_CONTEXT_LENGTH:4096 OLLAMA_DEBUG:INFO OLLAMA_FLASH_ATTENTION:false OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://0.0.0.0:11434 OLLAMA_INTEL_GPU:false OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MODELS:/root/.ollama/models OLLAMA_MULTIUSER_CACHE:false OLLAMA_NEW_ENGINE:false OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false ROCR_VISIBLE_DEVICES: http_proxy: https_proxy: no_proxy:]"
+ollama-1               | time=2026-11-19T14:50:26.483Z level=INFO source=images.go:522 msg="total blobs: 0"
+ollama-1               | time=2026-11-19T14:50:26.483Z level=INFO source=images.go:529 msg="total unused blobs removed: 0"
+ollama-1               | time=2026-11-19T14:50:26.483Z level=INFO source=routes.go:1578 msg="Listening on [::]:11434 (version 0.12.10)"
+ollama-1               | time=2026-11-19T14:50:26.484Z level=INFO source=runner.go:67 msg="discovering available GPUs..."
+ollama-1               | time=2026-11-19T14:50:26.485Z level=INFO source=server.go:400 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 41115"
+ollama-1               | time=2026-11-19T14:50:26.536Z level=INFO source=server.go:400 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 37543"
+ollama-1               | time=2026-11-19T14:50:26.581Z level=INFO source=server.go:400 msg="starting runner" cmd="/usr/bin/ollama runner --ollama-engine --port 36029"
+ollama-1               | time=2026-11-19T14:50:26.680Z level=INFO source=types.go:60 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="15.6 GiB" available="14.3 GiB"
+ollama-1               | time=2026-11-19T14:50:26.680Z level=INFO source=routes.go:1619 msg="entering low vram mode" "total vram"="0 B" threshold="20.0 GiB"
+ollama-1               | [GIN] 2026/11/19 - 14:50:27 | 200 |      61.955µs |       127.0.0.1 | HEAD     "/"
+ollama-1               | time=2026-11-19T14:50:28.566Z level=INFO source=download.go:177 msg="downloading 74701a8c35f6 in 14 100 MB part(s)"
+ollama-1               | time=2026-11-19T14:50:33.726Z level=INFO source=download.go:177 msg="downloading 966de95ca8a6 in 1 1.4 KB part(s)"
+ollama-1               | time=2026-11-19T14:50:34.914Z level=INFO source=download.go:177 msg="downloading fcc5a6bec9da in 1 7.7 KB part(s)"
+ollama-1               | time=2026-11-19T14:50:36.087Z level=INFO source=download.go:177 msg="downloading a70ff7e570d9 in 1 6.0 KB part(s)"
+ollama-1               | time=2026-11-19T14:50:37.255Z level=INFO source=download.go:177 msg="downloading 4f659a1e86d7 in 1 485 B part(s)"
+ollama-1               | [GIN] 2026/11/19 - 14:50:39 | 200 | 11.723065685s |       127.0.0.1 | POST     "/api/pull"
+ollama-1               | [GIN] 2026/11/19 - 14:50:40 | 200 |      53.129µs |       127.0.0.1 | GET      "/api/version"
+ollama-1               | [GIN] 2026/11/19 - 14:50:40 | 200 |      35.215µs |       127.0.0.1 | HEAD     "/"
+ollama-1               | [GIN] 2026/11/19 - 14:50:40 | 200 |      542.25µs |       127.0.0.1 | GET      "/api/tags"
+ollama-1               | [GIN] 2026/11/19 - 14:50:41 | 200 |      31.929µs |       127.0.0.1 | HEAD     "/"
+ollama-1               | [GIN] 2026/11/19 - 14:50:41 | 200 |  169.577537ms |       127.0.0.1 | POST     "/api/show"
+ollama-1               | llama_model_loader: loaded meta data with 30 key-value pairs and 147 tensors from /root/.ollama/models/blobs/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45 (version GGUF V3 (latest))
+ollama-1               | llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+ollama-1               | llama_model_loader: - kv   0:                       general.architecture str              = llama
+inventory-1            | 2026-11-19T14:50:40.231Z  INFO 1 --- [safeir-live-lab] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+inventory-1            | 2026-11-19T14:50:40.297Z  INFO 1 --- [safeir-live-lab] [           main] org.safeir.lab.LiveLabApplication        : Started LiveLabApplication in 12.314 seconds (process running for 13.795)
+inventory-1            | 2026-11-19T14:50:42.835Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+inventory-1            | 2026-11-19T14:50:42.836Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+inventory-1            | 2026-11-19T14:50:42.837Z  INFO 1 --- [safeir-live-lab] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+ollama-1               | llama_model_loader: - kv   1:                               general.type str              = model
+ollama-1               | llama_model_loader: - kv   2:                               general.name str              = Llama 3.2 1B Instruct
+ollama-1               | llama_model_loader: - kv   3:                           general.finetune str              = Instruct
+ollama-1               | llama_model_loader: - kv   4:                           general.basename str              = Llama-3.2
+ollama-1               | llama_model_loader: - kv   5:                         general.size_label str              = 1B
+ollama-1               | llama_model_loader: - kv   6:                               general.tags arr[str,6]       = ["facebook", "meta", "pytorch", "llam...
+ollama-1               | llama_model_loader: - kv   7:                          general.languages arr[str,8]       = ["en", "de", "fr", "it", "pt", "hi", ...
+ollama-1               | llama_model_loader: - kv   8:                          llama.block_count u32              = 16
+ollama-1               | llama_model_loader: - kv   9:                       llama.context_length u32              = 131072
+ollama-1               | llama_model_loader: - kv  10:                     llama.embedding_length u32              = 2048
+ollama-1               | llama_model_loader: - kv  11:                  llama.feed_forward_length u32              = 8192
+ollama-1               | llama_model_loader: - kv  12:                 llama.attention.head_count u32              = 32
+ollama-1               | llama_model_loader: - kv  13:              llama.attention.head_count_kv u32              = 8
+ollama-1               | llama_model_loader: - kv  14:                       llama.rope.freq_base f32              = 500000.000000
+ollama-1               | llama_model_loader: - kv  15:     llama.attention.layer_norm_rms_epsilon f32              = 0.000010
+ollama-1               | llama_model_loader: - kv  16:                 llama.attention.key_length u32              = 64
+ollama-1               | llama_model_loader: - kv  17:               llama.attention.value_length u32              = 64
+ollama-1               | llama_model_loader: - kv  18:                          general.file_type u32              = 7
+ollama-1               | llama_model_loader: - kv  19:                           llama.vocab_size u32              = 128256
+ollama-1               | llama_model_loader: - kv  20:                 llama.rope.dimension_count u32              = 64
+ollama-1               | llama_model_loader: - kv  21:                       tokenizer.ggml.model str              = gpt2
+ollama-1               | llama_model_loader: - kv  22:                         tokenizer.ggml.pre str              = llama-bpe
+ollama-1               | llama_model_loader: - kv  23:                      tokenizer.ggml.tokens arr[str,128256]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+ollama-1               | llama_model_loader: - kv  24:                  tokenizer.ggml.token_type arr[i32,128256]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+ollama-1               | llama_model_loader: - kv  25:                      tokenizer.ggml.merges arr[str,280147]  = ["Ġ Ġ", "Ġ ĠĠĠ", "ĠĠ ĠĠ", "...
+ollama-1               | llama_model_loader: - kv  26:                tokenizer.ggml.bos_token_id u32              = 128000
+ollama-1               | llama_model_loader: - kv  27:                tokenizer.ggml.eos_token_id u32              = 128009
+ollama-1               | llama_model_loader: - kv  28:                    tokenizer.chat_template str              = {{- bos_token }}\n{%- if custom_tools ...
+ollama-1               | llama_model_loader: - kv  29:               general.quantization_version u32              = 2
+ollama-1               | llama_model_loader: - type  f32:   34 tensors
+ollama-1               | llama_model_loader: - type q8_0:  113 tensors
+ollama-1               | print_info: file format = GGUF V3 (latest)
+ollama-1               | print_info: file type   = Q8_0
+ollama-1               | print_info: file size   = 1.22 GiB (8.50 BPW) 
+ollama-1               | load: printing all EOG tokens:
+ollama-1               | load:   - 128001 ('<|end_of_text|>')
+ollama-1               | load:   - 128008 ('<|eom_id|>')
+ollama-1               | load:   - 128009 ('<|eot_id|>')
+ollama-1               | load: special tokens cache size = 256
+ollama-1               | load: token to piece cache size = 0.7999 MB
+ollama-1               | print_info: arch             = llama
+ollama-1               | print_info: vocab_only       = 1
+ollama-1               | print_info: model type       = ?B
+ollama-1               | print_info: model params     = 1.24 B
+ollama-1               | print_info: general.name     = Llama 3.2 1B Instruct
+ollama-1               | print_info: vocab type       = BPE
+ollama-1               | print_info: n_vocab          = 128256
+ollama-1               | print_info: n_merges         = 280147
+ollama-1               | print_info: BOS token        = 128000 '<|begin_of_text|>'
+ollama-1               | print_info: EOS token        = 128009 '<|eot_id|>'
+ollama-1               | print_info: EOT token        = 128009 '<|eot_id|>'
+ollama-1               | print_info: EOM token        = 128008 '<|eom_id|>'
+ollama-1               | print_info: LF token         = 198 'Ċ'
+ollama-1               | print_info: EOG token        = 128001 '<|end_of_text|>'
+ollama-1               | print_info: EOG token        = 128008 '<|eom_id|>'
+ollama-1               | print_info: EOG token        = 128009 '<|eot_id|>'
+ollama-1               | print_info: max token length = 256
+ollama-1               | llama_model_load: vocab only - skipping tensors
+ollama-1               | time=2026-11-19T14:50:44.223Z level=INFO source=server.go:400 msg="starting runner" cmd="/usr/bin/ollama runner --model /root/.ollama/models/blobs/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45 --port 33753"
+ollama-1               | time=2026-11-19T14:50:44.223Z level=INFO source=server.go:470 msg="system memory" total="15.6 GiB" free="13.4 GiB" free_swap="3.0 GiB"
+ollama-1               | time=2026-11-19T14:50:44.223Z level=INFO source=memory.go:110 msg="new model will fit in available system memory for CPU inference, loading" model=/root/.ollama/models/blobs/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45 parallel=1 required="1.3 GiB"
+ollama-1               | time=2026-11-19T14:50:44.223Z level=INFO source=server.go:522 msg=offload library=cpu layers.requested=-1 layers.model=17 layers.offload=0 layers.split=[] memory.available=[] memory.gpu_overhead="0 B" memory.required.full="1.3 GiB" memory.required.partial="0 B" memory.required.kv="128.0 MiB" memory.required.allocations=[] memory.weights.total="1.2 GiB" memory.weights.repeating="986.2 MiB" memory.weights.nonrepeating="266.2 MiB" memory.graph.full="280.0 MiB" memory.graph.partial="464.0 MiB"
+ollama-1               | time=2026-11-19T14:50:44.237Z level=INFO source=runner.go:910 msg="starting go runner"
+ollama-1               | load_backend: loaded CPU backend from /usr/lib/ollama/libggml-cpu-haswell.so
+ollama-1               | time=2026-11-19T14:50:44.244Z level=INFO source=ggml.go:104 msg=system CPU.0.SSE3=1 CPU.0.SSSE3=1 CPU.0.AVX=1 CPU.0.AVX2=1 CPU.0.F16C=1 CPU.0.FMA=1 CPU.0.BMI2=1 CPU.0.LLAMAFILE=1 CPU.1.LLAMAFILE=1 compiler=cgo(gcc)
+ollama-1               | time=2026-11-19T14:50:44.245Z level=INFO source=runner.go:946 msg="Server listening on 127.0.0.1:33753"
+ollama-1               | time=2026-11-19T14:50:44.256Z level=INFO source=runner.go:845 msg=load request="{Operation:commit LoraPath:[] Parallel:1 BatchSize:512 FlashAttention:false KvSize:4096 KvCacheType: NumThreads:2 GPULayers:[] MultiUserCache:false ProjectorPath: MainGPU:0 UseMmap:false}"
+ollama-1               | time=2026-11-19T14:50:44.256Z level=INFO source=server.go:1251 msg="waiting for llama runner to start responding"
+ollama-1               | time=2026-11-19T14:50:44.257Z level=INFO source=server.go:1285 msg="waiting for server to become available" status="llm server loading model"
+ollama-1               | llama_model_loader: loaded meta data with 30 key-value pairs and 147 tensors from /root/.ollama/models/blobs/sha256-74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45 (version GGUF V3 (latest))
+ollama-1               | llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+ollama-1               | llama_model_loader: - kv   0:                       general.architecture str              = llama
+ollama-1               | llama_model_loader: - kv   1:                               general.type str              = model
+ollama-1               | llama_model_loader: - kv   2:                               general.name str              = Llama 3.2 1B Instruct
+ollama-1               | llama_model_loader: - kv   3:                           general.finetune str              = Instruct
+ollama-1               | llama_model_loader: - kv   4:                           general.basename str              = Llama-3.2
+ollama-1               | llama_model_loader: - kv   5:                         general.size_label str              = 1B
+ollama-1               | llama_model_loader: - kv   6:                               general.tags arr[str,6]       = ["facebook", "meta", "pytorch", "llam...
+ollama-1               | llama_model_loader: - kv   7:                          general.languages arr[str,8]       = ["en", "de", "fr", "it", "pt", "hi", ...
+ollama-1               | llama_model_loader: - kv   8:                          llama.block_count u32              = 16
+ollama-1               | llama_model_loader: - kv   9:                       llama.context_length u32              = 131072
+ollama-1               | llama_model_loader: - kv  10:                     llama.embedding_length u32              = 2048
+ollama-1               | llama_model_loader: - kv  11:                  llama.feed_forward_length u32              = 8192
+ollama-1               | llama_model_loader: - kv  12:                 llama.attention.head_count u32              = 32
+ollama-1               | llama_model_loader: - kv  13:              llama.attention.head_count_kv u32              = 8
+ollama-1               | llama_model_loader: - kv  14:                       llama.rope.freq_base f32              = 500000.000000
+ollama-1               | llama_model_loader: - kv  15:     llama.attention.layer_norm_rms_epsilon f32              = 0.000010
+ollama-1               | llama_model_loader: - kv  16:                 llama.attention.key_length u32              = 64
+ollama-1               | llama_model_loader: - kv  17:               llama.attention.value_length u32              = 64
+ollama-1               | llama_model_loader: - kv  18:                          general.file_type u32              = 7
+ollama-1               | llama_model_loader: - kv  19:                           llama.vocab_size u32              = 128256
+ollama-1               | llama_model_loader: - kv  20:                 llama.rope.dimension_count u32              = 64
+ollama-1               | llama_model_loader: - kv  21:                       tokenizer.ggml.model str              = gpt2
+ollama-1               | llama_model_loader: - kv  22:                         tokenizer.ggml.pre str              = llama-bpe
+ollama-1               | llama_model_loader: - kv  23:                      tokenizer.ggml.tokens arr[str,128256]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+ollama-1               | llama_model_loader: - kv  24:                  tokenizer.ggml.token_type arr[i32,128256]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+ollama-1               | llama_model_loader: - kv  25:                      tokenizer.ggml.merges arr[str,280147]  = ["Ġ Ġ", "Ġ ĠĠĠ", "ĠĠ ĠĠ", "...
+ollama-1               | llama_model_loader: - kv  26:                tokenizer.ggml.bos_token_id u32              = 128000
+ollama-1               | llama_model_loader: - kv  27:                tokenizer.ggml.eos_token_id u32              = 128009
+ollama-1               | llama_model_loader: - kv  28:                    tokenizer.chat_template str              = {{- bos_token }}\n{%- if custom_tools ...
+ollama-1               | llama_model_loader: - kv  29:               general.quantization_version u32              = 2
+ollama-1               | llama_model_loader: - type  f32:   34 tensors
+ollama-1               | llama_model_loader: - type q8_0:  113 tensors
+ollama-1               | print_info: file format = GGUF V3 (latest)
+ollama-1               | print_info: file type   = Q8_0
+ollama-1               | print_info: file size   = 1.22 GiB (8.50 BPW) 
+ollama-1               | load: printing all EOG tokens:
+ollama-1               | load:   - 128001 ('<|end_of_text|>')
+ollama-1               | load:   - 128008 ('<|eom_id|>')
+ollama-1               | load:   - 128009 ('<|eot_id|>')
+ollama-1               | load: special tokens cache size = 256
+ollama-1               | load: token to piece cache size = 0.7999 MB
+ollama-1               | print_info: arch             = llama
+ollama-1               | print_info: vocab_only       = 0
+ollama-1               | print_info: n_ctx_train      = 131072
+ollama-1               | print_info: n_embd           = 2048
+ollama-1               | print_info: n_layer          = 16
+ollama-1               | print_info: n_head           = 32
+ollama-1               | print_info: n_head_kv        = 8
+ollama-1               | print_info: n_rot            = 64
+ollama-1               | print_info: n_swa            = 0
+ollama-1               | print_info: is_swa_any       = 0
+ollama-1               | print_info: n_embd_head_k    = 64
+ollama-1               | print_info: n_embd_head_v    = 64
+ollama-1               | print_info: n_gqa            = 4
+ollama-1               | print_info: n_embd_k_gqa     = 512
+ollama-1               | print_info: n_embd_v_gqa     = 512
+ollama-1               | print_info: f_norm_eps       = 0.0e+00
+ollama-1               | print_info: f_norm_rms_eps   = 1.0e-05
+ollama-1               | print_info: f_clamp_kqv      = 0.0e+00
+ollama-1               | print_info: f_max_alibi_bias = 0.0e+00
+ollama-1               | print_info: f_logit_scale    = 0.0e+00
+ollama-1               | print_info: f_attn_scale     = 0.0e+00
+ollama-1               | print_info: n_ff             = 8192
+ollama-1               | print_info: n_expert         = 0
+ollama-1               | print_info: n_expert_used    = 0
+ollama-1               | print_info: causal attn      = 1
+ollama-1               | print_info: pooling type     = 0
+ollama-1               | print_info: rope type        = 0
+ollama-1               | print_info: rope scaling     = linear
+ollama-1               | print_info: freq_base_train  = 500000.0
+ollama-1               | print_info: freq_scale_train = 1
+ollama-1               | print_info: n_ctx_orig_yarn  = 131072
+ollama-1               | print_info: rope_finetuned   = unknown
+ollama-1               | print_info: model type       = 1B
+ollama-1               | print_info: model params     = 1.24 B
+ollama-1               | print_info: general.name     = Llama 3.2 1B Instruct
+ollama-1               | print_info: vocab type       = BPE
+ollama-1               | print_info: n_vocab          = 128256
+ollama-1               | print_info: n_merges         = 280147
+ollama-1               | print_info: BOS token        = 128000 '<|begin_of_text|>'
+ollama-1               | print_info: EOS token        = 128009 '<|eot_id|>'
+ollama-1               | print_info: EOT token        = 128009 '<|eot_id|>'
+ollama-1               | print_info: EOM token        = 128008 '<|eom_id|>'
+ollama-1               | print_info: LF token         = 198 'Ċ'
+ollama-1               | print_info: EOG token        = 128001 '<|end_of_text|>'
+ollama-1               | print_info: EOG token        = 128008 '<|eom_id|>'
+ollama-1               | print_info: EOG token        = 128009 '<|eot_id|>'
+ollama-1               | print_info: max token length = 256
+ollama-1               | load_tensors: loading model tensors, this can take a while... (mmap = false)
+ollama-1               | load_tensors:          CPU model buffer size =  1252.41 MiB
+ollama-1               | llama_init_from_model: model default pooling_type is [0], but [-1] was specified
+ollama-1               | llama_context: constructing llama_context
+ollama-1               | llama_context: n_seq_max     = 1
+ollama-1               | llama_context: n_ctx         = 4096
+ollama-1               | llama_context: n_ctx_per_seq = 4096
+ollama-1               | llama_context: n_batch       = 512
+ollama-1               | llama_context: n_ubatch      = 512
+ollama-1               | llama_context: causal_attn   = 1
+ollama-1               | llama_context: flash_attn    = disabled
+ollama-1               | llama_context: kv_unified    = false
+ollama-1               | llama_context: freq_base     = 500000.0
+ollama-1               | llama_context: freq_scale    = 1
+ollama-1               | llama_context: n_ctx_per_seq (4096) < n_ctx_train (131072) -- the full capacity of the model will not be utilized
+ollama-1               | llama_context:        CPU  output buffer size =     0.50 MiB
+ollama-1               | llama_kv_cache:        CPU KV buffer size =   128.00 MiB
+ollama-1               | llama_kv_cache: size =  128.00 MiB (  4096 cells,  16 layers,  1/1 seqs), K (f16):   64.00 MiB, V (f16):   64.00 MiB
+ollama-1               | llama_context:        CPU compute buffer size =   282.01 MiB
+ollama-1               | llama_context: graph nodes  = 582
+ollama-1               | llama_context: graph splits = 1
+ollama-1               | time=2026-11-19T14:50:45.512Z level=INFO source=server.go:1289 msg="llama runner started in 1.29 seconds"
+ollama-1               | time=2026-11-19T14:50:45.512Z level=INFO source=sched.go:500 msg="loaded runners" count=1
+ollama-1               | time=2026-11-19T14:50:45.512Z level=INFO source=server.go:1251 msg="waiting for llama runner to start responding"
+ollama-1               | time=2026-11-19T14:50:45.512Z level=INFO source=server.go:1289 msg="llama runner started in 1.29 seconds"
+ollama-1               | [GIN] 2026/11/19 - 14:50:52 | 200 |  9.280166327s |      172.18.0.6 | POST     "/api/generate"
+ollama-1               | [GIN] 2026/11/19 - 14:50:57 | 200 |  4.140771537s |      172.18.0.6 | POST     "/api/generate"
+ollama-1               | [GIN] 2026/11/19 - 14:51:01 | 200 |  3.460839948s |      172.18.0.6 | POST     "/api/generate"
+ollama-1               | [GIN] 2026/11/19 - 14:51:04 | 200 |  3.007537384s |      172.18.0.6 | POST     "/api/generate"
+ollama-1               | [GIN] 2026/11/19 - 14:51:14 | 200 |  2.812097003s |      172.18.0.6 | POST     "/api/generate"
+ollama-1               | [GIN] 2026/11/19 - 14:51:52 | 200 |  2.673096219s |      172.18.0.6 | POST     "/api/generate"
