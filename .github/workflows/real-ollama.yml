@@ -24,6 +24,11 @@ jobs:
           docker compose -f docker-compose.lab.yml exec -T ollama ollama show llama3.2:1b > lab/results/ollama/model-details.txt
       - name: Generate and replay real Ollama proposal
         run: python3 lab/experiments/ollama_smoke.py
+      - name: Evaluate model proposals across expanded live fault matrix
+        run: python3 lab/experiments/expanded_replay.py --ollama --output lab/results/ollama/expanded
+      - name: Generate historical scenario accounting and method measurement
+        if: always()
+        run: python3 research-audit/review_accounting.py > lab/results/ollama/review-accounting.json
       - name: Collect Docker logs
         if: always()
         run: docker compose -f docker-compose.lab.yml --profile ollama logs --no-color > ollama-docker.log 2>&1 || true
