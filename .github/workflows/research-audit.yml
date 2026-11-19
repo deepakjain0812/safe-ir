@@ -1,7 +1,13 @@
 name: Research audit
 on:
   push:
-    branches: [research-osaudit, research-evidence-docs]
+    branches: [main, research-osaudit, research-evidence-docs]
+    paths:
+      - 'SAFE-IR_Preprint.pdf'
+      - 'docs/publications/safe-ir.pdf'
+      - 'osaudit.toml'
+      - 'research-audit/**'
+      - '.github/workflows/research-audit.yml'
   workflow_dispatch:
 permissions:
   contents: write
@@ -23,6 +29,8 @@ jobs:
           mkdir -p research-audit/inputs research-audit/results
           git rev-parse HEAD > research-audit/audit.log
           python --version >> research-audit/audit.log
+          cmp SAFE-IR_Preprint.pdf docs/publications/safe-ir.pdf
+          sha256sum SAFE-IR_Preprint.pdf docs/publications/safe-ir.pdf | tee research-audit/pdf-checksums.txt >> research-audit/audit.log
       - name: Install official auditor
         run: |
           sudo apt-get update
@@ -82,3 +90,4 @@ jobs:
             research-audit/results/
             research-audit/number-findings.json
             research-audit/audit.log
+            research-audit/pdf-checksums.txt
