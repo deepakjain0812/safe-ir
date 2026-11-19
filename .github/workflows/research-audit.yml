@@ -11,6 +11,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: read
 jobs:
   audit:
     concurrency:
@@ -63,6 +64,33 @@ jobs:
       - name: Extract historical results with new provenance
         run: |
           osaudit run --input research-audit/inputs/safe-ir-supplement.zip -o research-audit/results/historical.json -- python research-audit/extract_evidence.py research-audit/inputs/safe-ir-supplement.zip
+      - name: Restore exact archived live experiment files
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          dest=research-audit/inputs/live-20261119
+          if [ ! -f "$dest/MANIFEST.sha256" ]; then
+            gh api repos/${{ github.repository }}/actions/artifacts/14539544665/zip > /tmp/safe-ir-live-original.zip
+            echo 'ebbd67da6850fb90bec7895f43c04866b5cb36aa6945528a21cbe50c3ff7e788  /tmp/safe-ir-live-original.zip' | sha256sum -c -
+            python - <<'PY'
+          import json, zipfile
+          from pathlib import Path
+          dest = Path("research-audit/inputs/live-20261119")
+          names = {"expanded_replay.json", "model-details.txt", "models.txt", "version.txt", "one_model_replay.json", "review-accounting.json", "ollama-docker.log"}
+          with zipfile.ZipFile("/tmp/safe-ir-live-original.zip") as z:
+              for name in sorted(names):
+                  matches = [p for p in z.namelist() if Path(p).name == name]
+                  assert len(matches) == 1, (name, matches)
+                  raw = z.read(matches[0])
+                  if name == "expanded_replay.json":
+                      assert json.loads(raw) == json.loads((dest / name).read_bytes()), "Original and transcription differ"
+                  (dest / name).write_bytes(raw)
+          PY
+            (cd "$dest" && sha256sum expanded_replay.json model-details.txt models.txt version.txt one_model_replay.json review-accounting.json ollama-docker.log > MANIFEST.sha256)
+          fi
+          (cd "$dest" && sha256sum -c MANIFEST.sha256)
       - name: Aggregate archived live-model evidence
         run: |
           osaudit run --input research-audit/inputs/live-20261119/expanded_replay.json -o research-audit/results/live-20261119.json -- python research-audit/aggregate_live.py
@@ -75,6 +103,16 @@ jobs:
           status=${PIPESTATUS[0]}
           if [ "$number_status" -eq 2 ]; then exit 2; fi
           exit "$status"
+      - name: Preserve exact live evidence on main
+        if: success() && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f research-audit/inputs/live-20261119/
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive verified original live experiment files"
+            git push origin HEAD:main
+          fi
       - name: Preserve verified evidence in Git
         if: success() && github.ref == 'refs/heads/research-evidence-docs'
         run: |
