@@ -14,7 +14,7 @@ SAFE-IR separates a replaceable remediation proposer (deterministic rules or loc
 
 ## Research publication and open science
 
-The [published preprint (Zenodo DOI)](https://doi.org/10.5281/zenodo.24372409) now describes the original v0.1.0 synthetic study and the preliminary v0.2.0 live-model evaluation (see revised Zenodo manuscript; local PDF mirror requires synchronization). See the [paper PDF](SAFE-IR_Preprint.pdf), [archived evidence](https://doi.org/10.5281/zenodo.24206339), [claim ledger](PAPER-NUMBERS.csv), [evidence guide](CLAIMS-EVIDENCE.md), and [audit reproduction instructions](research-audit/README.md).
+The [published preprint (Zenodo DOI)](https://doi.org/10.5281/zenodo.24372409) now describes the original v0.1.0 synthetic study and the preliminary v0.2.0 live-model evaluation (see revised Zenodo manuscript; local PDF mirror may be older than Zenodo v2). See the [current paper PDF](https://zenodo.org/records/24372409/files/SAFE-IR_Preprint.pdf), [archived evidence](https://doi.org/10.5281/zenodo.24206339), [claim ledger](PAPER-NUMBERS.csv), [evidence guide](CLAIMS-EVIDENCE.md), and [audit reproduction instructions](research-audit/README.md).
 
 The historical synthetic evaluation contains 180 runs across six scenarios and three modes, with ten repeats per cell. Ten JUnit tests passed; the archived smoke report records four passing HTTP checks. The author-side [official osaudit run](https://github.com/deepakjain0812/safe-ir/actions/runs/44316608516) succeeded with zero numerical findings. The [November 19 automated review](https://github.com/monperrus/arxiv-endorsement/pull/66#issuecomment-7001362328) passed Gates 1, 2, 4 and 5; Gate 3 remains unresolved. This is neither endorsement nor peer review or production validation.
 
