@@ -12,7 +12,7 @@ instruments = ["research-audit/extract_evidence.py", "research-audit/measure_pol
 [[numbers.allow]]
 value = "2026"
 reason = "Preprint publication year, printed on page 1."
-cite = "https://zenodo.org/records/24285121"
+cite = "https://zenodo.org/records/24372409"
 
 [[numbers.allow]]
 value = "40,000"
