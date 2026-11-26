@@ -1,6 +1,6 @@
 schema = "https://github.com/ASSERT-KTH/assert-research-agent/blob/main/schemas/audit-v1.json"
 
-# Author-side audit passed with osaudit 0.7.0; independent review pending.
+# Revised manuscript audit: independent Gate 5 recheck pending.
 [paper]
 pdf = "SAFE-IR_Preprint.pdf"
 
@@ -8,6 +8,7 @@ pdf = "SAFE-IR_Preprint.pdf"
 files = ["research-audit/results/*.json"]
 instruments = ["research-audit/extract_evidence.py", "research-audit/measure_policy.py", "research-audit/aggregate_live.py"]
 
+# Policy thresholds are extracted from pinned Java source into policy-structure.json.
 # Non-empirical constants and external claims, traced to original sources.
 [[numbers.allow]]
 value = "2026"
@@ -18,21 +19,6 @@ cite = "https://zenodo.org/records/24372409"
 value = "40,000"
 reason = "External study size, more than 40,000 incidents, stated in Ahmed et al. abstract, reference [2]."
 cite = "https://doi.org/10.1109/ICSE48619.2023.00149"
-
-[[numbers.allow]]
-value = "0.2"
-reason = "Fixed restart error-rate threshold in policy and rule proposer; not calibrated or measured."
-cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
-
-[[numbers.allow]]
-value = "1,000"
-reason = "Fixed queue-depth threshold in policy and rule proposer."
-cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
-
-[[numbers.allow]]
-value = "1,500"
-reason = "Fixed latency threshold in milliseconds in policy and rule proposer."
-cite = "https://github.com/deepakjain0812/safe-ir/blob/bfb0f5a89c212634c268e2e42adbe85cb07190c8/src/main/java/org/safeir/policy/EcraPolicyEngine.java"
 
 [[numbers.allow]]
 value = "21"
