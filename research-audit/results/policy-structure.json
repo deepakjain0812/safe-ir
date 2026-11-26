@@ -1,4 +1,24 @@
 {
-  "policy_decision_branches": 7,
-  "method_physical_lines": 15
+ "policy_decision_branches": 7,
+ "method_physical_lines": 15,
+ "restart_error_rate_threshold": 0.2,
+ "latency_threshold_ms": 1500,
+ "queue_depth_threshold": 1000,
+ "provenance": {
+  "schema": "https://github.com/ASSERT-KTH/assert-research-agent/blob/main/schemas/provenance-v1.json",
+  "command": [
+   "python",
+   "research-audit/measure_policy.py"
+  ],
+  "cwd": ".",
+  "inputs": [
+   {
+    "path": "research-audit/inputs/original-policy.java",
+    "sha256": "96d7375ab57c63131cb9232b978c6fc2b8cf656643df8af35c575f4a957830fd"
+   }
+  ],
+  "commit": "a6f1009b91d7cc32d917cc6af3a01ddf46f30225",
+  "now": "2026-11-26T05:21:04+00:00",
+  "osaudit": "0.7.0"
+ }
 }
