@@ -108,9 +108,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f research-audit/inputs/live-20261119/
+          git add -f research-audit/inputs/live-20261119/ research-audit/inputs/original-policy.java research-audit/results/live-20261119.json research-audit/results/policy-structure.json
           if ! git diff --cached --quiet; then
-            git commit -m "Archive verified original live experiment files"
+            git commit -m "Archive verified live evidence and generated audit provenance [skip ci]"
             git push origin HEAD:main
           fi
       - name: Preserve verified evidence in Git
